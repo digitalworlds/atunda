@@ -40,6 +40,40 @@ class CreateUserTest(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_login(self):
+        user = User.objects.create_user(username=self.testUser['username'], password=self.testUser['password'])
+        
+        response = client.post(
+            reverse('token_obtain_pair'),
+            data = json.dumps(self.testUser),
+            content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('access', response.data)
+        self.assertIn('refresh', response.data)
+    
+    def test_refresh(self):
+        user = User.objects.create_user(username=self.testUser['username'], password=self.testUser['password'])
+        
+        response = client.post(
+            reverse('token_obtain_pair'),
+            data = json.dumps(self.testUser),
+            content_type='application/json'
+        )
+        
+        response_refresh_data = {"refresh": response.data['refresh']}
+        response_refresh = client.post(
+            reverse('token_refresh'),
+            data = json.dumps(response_refresh_data),
+            content_type='application/json'
+        )
+
+        self.assertEqual(response_refresh.status_code, status.HTTP_200_OK)
+        self.assertIn('access', response.data)
+
+
+
 # class FileUploadTestCase(TestCase):
 #     def setUp(self):
 #         self.client = APIClient()
