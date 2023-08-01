@@ -1,0 +1,6 @@
+/Scripts
+/Lib
+/Include
+/share
+pyvenv.cfg
+__pycache__
