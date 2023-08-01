@@ -1,6 +1,6 @@
 # atunda-data-upload
 
-How to setup project for development. This project relies on the python venv module for creating a virtual environment for dependencies. After cloning the repository, run the following command to inititalize the python virtual environment. 
+How to setup project for development. This project relies on the python venv module for creating a virtual environment for dependencies. After cloning the repository, run the following command in the atunda-data-upload directory to inititalize the python virtual environment. 
 
 ```shell
 python -m venv .
@@ -10,6 +10,12 @@ This should create various directories in the root of the project. Make sure tha
 
 ```shell
 ./Scripts/activate
+```
+
+Note that for macOS, the command is different:
+
+```shell
+source bin/activate
 ```
 
 This should start your virtual environment for Python. After starting the virtual environment, download all project dependencies through pip using: 
@@ -30,13 +36,13 @@ To install all react dependencies run the following command in the frontend dire
 npm install
 ```
 
-Once all dependencies are install, configurations are made for development. To run the Django server run:
+Once all dependencies are install, configurations are made for development. To run the Django server, from the atunda directory run:
 
 ```
 python manage.py runserver
 ```
 
-To run the react server run: 
+To run the react server, from the frontend directory run: 
 
 ```
 npm start
