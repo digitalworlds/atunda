@@ -1,6 +1,6 @@
-# atunda-data-upload
+# ATUNDA
 
-How to setup project for development. This project relies on the python venv module for creating a virtual environment for dependencies. After cloning the repository, run the following command in the atunda-data-upload directory to inititalize the python virtual environment. 
+How to setup project for development. This project relies on the python venv module for creating a virtual environment for dependencies. After cloning the repository, run the following command in the ATUNDA directory to inititalize the python virtual environment. 
 
 ```shell
 python -m venv .
