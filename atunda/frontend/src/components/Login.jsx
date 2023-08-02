@@ -39,7 +39,6 @@ export default function Login({setUser}) {
     if (response !== "InvalidUser") {
       setUser({
         username: formInput.username,
-        password: formInput.password,
         accessToken: response.access,
         refreshToken: response.refresh,
       });
