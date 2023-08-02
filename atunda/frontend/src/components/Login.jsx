@@ -2,18 +2,23 @@ import axios from 'axios';
 import { useState } from 'react';
 import { APPURL } from '../DjangoUrl';
 
-
+// Function used to log in a user with an inputted username and password
 async function apiLogin(formInput) {
+  // Sends post request to root app url and api-token/ route containing username and password data
   const config = {
     method: "post",
     url: APPURL + "api-token/",
     data: formInput
   }
+  // If valid user, returns token data
   try{
     const { data } = await axios(config);
     console.log(data);
     return data;
-  } catch(err) {
+  } 
+  // If invalid user axios returns 401 error
+  // Returns invalid user string in this case
+  catch(err) {
     return "InvalidUser";
   }
 }
@@ -28,10 +33,9 @@ export default function Login({setUser}) {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    console.log(formInput.username);
-    console.log(formInput.password);
+    // Attempts to retrieve user's tokens
     const response = await apiLogin(formInput);
-    console.log(response);
+    // Sets user state if login response is valid
     if (response !== "InvalidUser") {
       setUser({
         username: formInput.username,
