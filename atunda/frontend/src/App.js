@@ -1,10 +1,22 @@
 import { useState, useEffect } from "react";
 import Login from "./components/Login";
+import axios from "axios";
+import { APPURL } from "./DjangoUrl";
 
 function App() {
 
-  function handleCallbackResponse(response) {
+  async function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
+    const config = {
+      method: "post",
+      url: APPURL + "google-auth/",
+      data: {
+        "id_token": response.credential
+      },
+    };
+    const res = await axios(config);
+    console.log(res);
+
   }
 
   useEffect (() => {
