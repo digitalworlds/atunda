@@ -21,7 +21,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'atunda/media')
 
 MEDIA_URL = '/media/'
 
-print("media root", MEDIA_ROOT)
 
 
 # Quick-start development settings - unsuitable for production
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'api',
+    'socialauth',
 ]
 
 MIDDLEWARE = [
@@ -116,6 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+GOOGLE_CLIENT_ID = "89980881327-61v1jnjbsfdd8rhaoc57shdp77ga2n0f.apps.googleusercontent.com"
 
 REST_FRAMEWORK = {
    'DEFAULT_AUTHENTICATION_CLASSES': (
