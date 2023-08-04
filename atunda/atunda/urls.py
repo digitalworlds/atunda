@@ -21,6 +21,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from socialauth.views import GoogleSignInView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +30,4 @@ urlpatterns = [
     path('api-token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api-token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     path('google-auth/', GoogleSignInView.as_view(), name='google-auth')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

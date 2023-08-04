@@ -3,7 +3,7 @@ from api.models import videoUpload
 from django.contrib.auth.models import User
 
 class VideoUploadSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='owner.email')
     owner_id = serializers.ReadOnlyField(source='owner.id')
     path = serializers.FileField(required=False)
 
