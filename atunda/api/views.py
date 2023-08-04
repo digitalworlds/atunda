@@ -40,17 +40,16 @@ class VideoUploadViewSet(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         new_file = serializer.save(owner=self.request.user)
-        extension_index, file_type = find_video_type(new_file.title)
+        extension_index, file_type = find_video_type(str(new_file.path))
         if file_type != "mp4":
-            video_path = str(settings.BASE_DIR)[:-9] + '/atunda/media/'
-            mp4_name = new_file.title[:extension_index+1] + "mp4"
+            video_path = str(settings.BASE_DIR)[:-6] + '/atunda/media/'
+            print(video_path)
             mp4_path = str(new_file.path)[:extension_index+1] + "mp4"
             
             # Video conversion commented out for testing purposes. 
             clip = moviepy.VideoFileClip(video_path + str(new_file.path))
             clip.write_videofile(video_path + mp4_path)
             
-            new_file.title = mp4_name
             new_file.path = mp4_path
             new_file.save()
     
