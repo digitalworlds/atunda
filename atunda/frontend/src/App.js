@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
-import Login from "./components/Login";
+import { useEffect } from "react";
 import axios from "axios";
 import { APPURL } from "./DjangoUrl";
 
 function App() {
 
   async function handleCallbackResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
+
     const config = {
       method: "post",
       url: APPURL + "google-auth/",
@@ -15,7 +14,6 @@ function App() {
       },
     };
     const res = await axios(config);
-    console.log(res);
 
   }
 
@@ -40,17 +38,4 @@ function App() {
 
 }
 
-  // const [user, setUser] = useState({});
-  
-  // if (user.username) {
-  //   return (
-  //     <div>Hello {user.username}</div>
-  //   )
-  // }
-  // else {
-  //   return (
-  //     <Login setUser={setUser} />
-  //   )
-  // }
-// }
 export default App;
