@@ -27,6 +27,10 @@ class GoogleSignInView(APIView):
             # Check if the user exists in your database based on the email received from Google
             user, created = User.objects.get_or_create(email=id_info['email'], username=id_info['email'])
             
+            if user.first_name != id_info['given_name']:
+                user.first_name = id_info['given_name']
+            if user.last_name != id_info['family_name']:
+                user.last_name = id_info['family_name']
             # Generate a refresh token for the user
             refresh = RefreshToken.for_user(user)
 
@@ -34,6 +38,9 @@ class GoogleSignInView(APIView):
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
+                'email': str(user.email),
+                'first_name': str(user.first_name),
+                'last_name': str(user.last_name)
             }, status=status.HTTP_200_OK)
 
         except ValueError:
