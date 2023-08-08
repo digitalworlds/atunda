@@ -25,7 +25,7 @@ class GoogleSignInView(APIView):
                 raise ValueError('Invalid issuer.')
             print(id_info)
             # Check if the user exists in your database based on the email received from Google
-            user, created = User.objects.get_or_create(email=id_info['email'], username=id_info['email'])
+            user, created = User.objects.get_or_create(email=id_info['email'], username=id_info['sub'])
             
             if user.first_name != id_info['given_name']:
                 user.first_name = id_info['given_name']
