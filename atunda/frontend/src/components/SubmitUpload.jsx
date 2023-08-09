@@ -21,11 +21,12 @@ export default function SubmitUpload(props) {
       };
     const res = await axios(config);
     console.log(res);
+
   };
 
   return (
     <div className="SubmitUpload">
-      {queryVideo && queryTags && <button onClick={handleSubmit}>Upload</button>}
+      {queryVideo && queryTags != "" && <button onClick={handleSubmit}>Upload</button>}
     </div>
   );
 }

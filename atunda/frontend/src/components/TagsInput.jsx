@@ -1,9 +1,5 @@
 import React from "react";
 
-
-
-
-
 export default function TagsInput(props) {
     const { width, height, user, onQuery } = props;
 
@@ -25,7 +21,7 @@ export default function TagsInput(props) {
             e.preventDefault();
             setTags(prevState => [...prevState, trimmedInput]);
             setInput('');
-            onQuery(tags);
+            
         }
 
         if (key === 'Backspace' && !input.length && tags.length && isKeyReleased) {
@@ -43,12 +39,18 @@ export default function TagsInput(props) {
     const onKeyUp = () => {
         setIsKeyReleased(true);
         console.log(tags);
+        onQuery(tags);
       }
 
 
     const deleteTag = (index) => {
-        setTags(prevState => prevState.filter((tag, i) => i !== index))
+        tags.splice(index, 1);
+        setTags(prevState => [...prevState]);
         console.log(tags);
+        onQuery(tags)
+        if (tags == '') {
+            onQuery('');
+        }
       }
 
     return (
