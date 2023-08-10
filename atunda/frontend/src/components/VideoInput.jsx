@@ -1,15 +1,18 @@
 import React from "react";
 
 export default function VideoInput(props) {
-  const { width, height, user, file, setFile, source, setSource} = props;
+  const { width, height, user, file, setFile, source, setSource, setSuccess} = props;
 
   const inputRef = React.useRef();
 
   const handleChange = (event) => {
-    setFile(event.target.files[0]);
+    if(event.target.value != "") {
+      setFile(event.target.files[0]);
     
-    const url = URL.createObjectURL(event.target.files[0]);
-    setSource(url);
+      const url = URL.createObjectURL(event.target.files[0]);
+      setSource(url);
+    }
+    
   };
 
   const handleChoose = (event) => {
@@ -25,12 +28,12 @@ export default function VideoInput(props) {
         onChange={handleChange}
         accept=".mov,.mp4"
               />
-      {!source && <button onClick={handleChoose}>Choose File</button>}
+      {!source &&  <button className='filebutton' onClick={handleChoose}>Choose File</button>}
       {source && 
           <div class="file">
             <h2>Current File:</h2>
             <div>{file.name}</div>
-            <button className='remove'  onClick={handleChoose}>Change File</button>
+            <button onClick={handleChoose}>Change File</button>
         
         </div>}
       

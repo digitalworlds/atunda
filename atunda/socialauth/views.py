@@ -40,7 +40,8 @@ class GoogleSignInView(APIView):
                 'access': str(refresh.access_token),
                 'email': str(user.email),
                 'first_name': str(user.first_name),
-                'last_name': str(user.last_name)
+                'last_name': str(user.last_name),
+                'profile_pic': str(id_info['picture'])
             }, status=status.HTTP_200_OK)
 
         except ValueError:

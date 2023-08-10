@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TagsInput(props) {
-    const { width, height, user, tags, setTags} = props;
+    const { width, height, user, tags, setTags, setSuccess} = props;
 
     const [input, setInput] = React.useState('');
 
@@ -46,10 +46,6 @@ export default function TagsInput(props) {
         tags.splice(index, 1);
         setTags(prevState => [...prevState]);
         console.log(tags);
-        setTags(tags)
-        if (tags == '') {
-            setTags('');
-        }
       }
 
     return (

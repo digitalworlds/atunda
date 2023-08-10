@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
-import TagsInput from "./TagsInput";
+import "../styles.css";
 
 export default function SubmitUpload(props) {
-  const { width, height, user, file, setFile, source, setSource, tags, setTags} = props;
-
+  const { width, height, user, file, setFile, source, setSource, tags, setTags, setSuccess} = props;
   async function handleSubmit (event) {
     let formData = new FormData();
     formData.append('title', file.name);
@@ -27,13 +26,19 @@ export default function SubmitUpload(props) {
         setTags([]);
         setFile('');
         setSource('');
+        setSuccess('File Upload Successful');
+    } else {
+        setSuccess('File Upload Unsuccessful');
     }
+
+    
+
 
   };
 
   return (
     <div className="SubmitUpload">
-      {file && tags != "" && <button onClick={handleSubmit}>Upload</button>}
+      {file && tags != "" && <button onClick={handleSubmit}>Upload File</button>}
     </div>
   );
 }
