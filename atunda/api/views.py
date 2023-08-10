@@ -39,6 +39,11 @@ class VideoUploadViewSet(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     parser_classes = (MultiPartParser, FormParser)
 
+    def get_queryset(self):
+        user = self.request.user
+        queryset = videoUpload.objects.filter(owner=user)
+        return queryset
+
     def perform_create(self, serializer):
         new_file = serializer.save(owner=self.request.user)
         extension_index, file_type = find_video_type(str(new_file.path))
