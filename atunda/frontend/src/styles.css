@@ -1,26 +1,45 @@
 
-html, body {
+:root {
+  --main-bg-color: #335C81;
+  --main-header-color: #1B2845;
+  --secondary-header-color: #274060;
+  --main-text-color: white;
+  --main-button-color: #274060;
+  --secondary-button-color: #4B88BD;
+  --secondary-text-color: white;
+  --tertiary-text-color: grey;
+}
 
+html, body {
     padding: 0;
-    
     margin: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    
+    overflow: scroll;
+    background-color: var(--main-bg-color);
 }
 
 .App {
-    height: 100vh;
-    font-family: sans-serif;
-    background-color: grey;
-  }
+  position: fixed;
+  width: 100%;
+  font-family: sans-serif;
+}
 
   .Header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 10vh;
     display: flex;
-    background-color: blanchedalmond;
+    background-color: var(--main-header-color);
     padding: 1%;
+    border-color: var(--secondary-header-color);
+    border-bottom-width: 0.7vh;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-style: solid;
   }
+
+
   
   .Success {
     margin:auto;
@@ -37,14 +56,17 @@ html, body {
   .VideoInput {
     margin: 1%;
     display: flex;
-    /* overflow: scroll; */
+    justify-content: space-between;
+    justify-content: left;
+    overflow: hidden;
+    scroll-behavior: none;
     width: 98%;
-    border: 1px grey solid;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    color: black;
-    background-color: grey;
+    margin-top: 17vh;
   }
+
+  
   
   .VideoInput_input {
     opacity:0;
@@ -53,11 +75,22 @@ html, body {
   }
   
   .VideoInput_video {
-    width:fit-content;
-    background-color: grey;
-    margin: 0;
+    height: auto;
+    max-height: 40vh;
+    width: fit-content;
+    max-width: 98%;
+    margin: auto;
+    margin-left: 0;
     padding: 5px;
-    border-radius: 20px;
+
+  }
+  @media ( device-width < 780px) {
+    .VideoInput {
+      flex-direction: column;
+    }
+    .VideoInput_video {
+      margin:auto;
+    }
   }
   
   
@@ -66,11 +99,8 @@ html, body {
     display: flex;
     overflow: scroll;
     width: 98%;
-    border: 1px grey solid;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    color: black;
-    background-color: grey;
   }
   
   .container input {
@@ -80,59 +110,96 @@ html, body {
     border-radius: 5px;
     padding: 14px;
     padding-left: 14px;
-    background-color: lightgray;
+    background-color: var(--main-button-color);
     outline: 0;
+    color: var(--secondary-text-color);
+    
   }
+
+  ::placeholder {
+    color: var(--tertiary-text-color);
+  }
+
   
   .tag {
     display: flex;
     align-items: center;
     margin: 7px 0;
     margin-right: 10px;
-    padding: 0 10px;
-    padding-right: 5px;
-    border: 1px solid orange;
     border-radius: 5px;
-    background-color: orange;
+    background-color: var(--main-button-color);
     white-space: nowrap;
-    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    color: var(--secondary-text-color);
   }
   
-  .tag button {
-    display: flex;
-    padding: 6px;
-    border: none;
-    background-color: unset;
-    cursor: pointer;
-    color: white;
+
+  .tag:hover {
+    background-color: var(--secondary-button-color);
   }
 
-
-
   .file {
+    width: 98%;
+  }
+
+  .current_file {
+    height: 30%;
     display: flex;
-    flex-direction: column;
-    overflow: scroll;
+    overflow: wrap;
     align-content: space-between;
     padding: 5px;
     width: 100%;
+    color: var(--secondary-text-color);
   }
 
-  .file button {
-    padding: 5%;
+  @media (780px < device-width < 940px) {
+    .current_file {
+      flex-direction: column;
+  }
+}
+
+  @media (device-width < 400px) {
+    .current_file {
+      flex-direction: column;
+  }
+
+
+    
+  }
+  .current_file button {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin:auto;
-    border-radius: 15px;
-    background-color: lightgray;
+    margin-left: 5%;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--main-button-color);
+    color: var(--secondary-text-color);
+    cursor: pointer;
+  }
+
+  .current_file button:hover {
+    background-color: var(--secondary-button-color);
   }
 
   .SubmitUpload button{
+    color: var(--secondary-text-color);
     font-size: xx-large;
     width: 80%;
     margin: 10%;
     margin-top: 5%;
     padding: 3%;
-    border-radius: 25px;
-    background-color: lightgrey;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--main-button-color);
+    cursor: pointer;
+  }
+
+  .SubmitUpload button:hover {
+    background-color: var(--secondary-button-color);
   }
 
 
@@ -144,8 +211,26 @@ html, body {
 h1 {
     margin-top: auto;
     margin-bottom: auto;
+    color: var(--main-text-color);
 }
 
 .filebutton {
     padding: 10px;
+    margin-left: 0;
+    background-color: var(--main-button-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--secondary-text-color);
+    cursor: pointer;
 }
+
+.filebutton:hover {
+  background-color: var(--secondary-button-color);
+}
+
+h2 {
+  margin: auto;
+  margin-right: 0;
+  margin-left: 20px;
+}
+

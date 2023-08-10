@@ -51,10 +51,7 @@ export default function TagsInput(props) {
     return (
         <div className="container">
             {tags.map((tag, index) => (
-            <div className="tag">
-                {tag}
-                <button onClick={() => deleteTag(index)}>x</button>
-            </div>
+                <button className="tag" onClick={() => deleteTag(index)}>{tag}  x</button>
             ))}
             <input
                 value={input}
