@@ -2,14 +2,15 @@ import GoogleLogin from "./components/GoogleLogin";
 import VideoInput from "./components/VideoInput";
 import TagsInput from "./components/TagsInput";
 import SubmitUpload from "./components/SubmitUpload";
-import { useState } from "react";
+import { useState, React } from "react";
 import "./styles.css";
 
 
 function App() {
   const [user, setUser] = useState({});
-  const [queryVideo, setQueryVideo] = useState("");
-  const [queryTags, setQueryTags] = useState("");
+  const [source, setSource] = useState();
+  const [file, setFile] = useState();
+  const [tags, setTags] = useState([]);
 
   if (user.first_name) {
     return (
@@ -17,9 +18,9 @@ function App() {
         <div>Hello {user.first_name}!</div>
         <div className="App">
           <h1>Video upload</h1>
-          <VideoInput onQuery={setQueryVideo} user={user} width={400} height={300} />
-          <TagsInput onQuery={setQueryTags} user={user} width={400} height={300} />
-          <SubmitUpload queryTags={queryTags} queryVideo={queryVideo} user={user} width={400} height={300} />
+          <VideoInput file={file} setFile={setFile} source={source} setSource={setSource} user={user} width={400} height={300} />
+          <TagsInput tags={tags} setTags={setTags} user={user} width={400} height={300} />
+          <SubmitUpload file={file} setFile={setFile} source={source} setSource={setSource} tags={tags} setTags={setTags} user={user} width={400} height={300} />
         </div>
       </div>
       

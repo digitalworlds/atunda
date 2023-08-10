@@ -1,10 +1,9 @@
 import React from "react";
 
 export default function TagsInput(props) {
-    const { width, height, user, onQuery } = props;
+    const { width, height, user, tags, setTags} = props;
 
     const [input, setInput] = React.useState('');
-    const [tags, setTags] = React.useState([]);
 
     const onChange = (e) => {
         const { value } = e.target;
@@ -39,7 +38,7 @@ export default function TagsInput(props) {
     const onKeyUp = () => {
         setIsKeyReleased(true);
         console.log(tags);
-        onQuery(tags);
+        setTags(tags);
       }
 
 
@@ -47,9 +46,9 @@ export default function TagsInput(props) {
         tags.splice(index, 1);
         setTags(prevState => [...prevState]);
         console.log(tags);
-        onQuery(tags)
+        setTags(tags)
         if (tags == '') {
-            onQuery('');
+            setTags('');
         }
       }
 

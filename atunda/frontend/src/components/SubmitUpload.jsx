@@ -1,15 +1,16 @@
 import React from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
+import TagsInput from "./TagsInput";
 
 export default function SubmitUpload(props) {
-  const { width, height, user, queryVideo, queryTags } = props;
+  const { width, height, user, file, setFile, source, setSource, tags, setTags} = props;
 
   async function handleSubmit (event) {
     let formData = new FormData();
-    formData.append('title', queryVideo.name);
-    formData.append('path', queryVideo);
-    formData.append('tags', queryTags);
+    formData.append('title', file.name);
+    formData.append('path', file);
+    formData.append('tags', tags);
     const config = {
         method: "post",
         url: APPURL + "api/video/",
@@ -22,11 +23,17 @@ export default function SubmitUpload(props) {
     const res = await axios(config);
     console.log(res);
 
+    if (res.status == 201) {
+        setTags([]);
+        setFile('');
+        setSource('');
+    }
+
   };
 
   return (
     <div className="SubmitUpload">
-      {queryVideo && queryTags != "" && <button onClick={handleSubmit}>Upload</button>}
+      {file && tags != "" && <button onClick={handleSubmit}>Upload</button>}
     </div>
   );
 }

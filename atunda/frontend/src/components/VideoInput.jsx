@@ -1,27 +1,19 @@
 import React from "react";
-import axios from "axios";
-import { APPURL } from "../DjangoUrl";
 
 export default function VideoInput(props) {
-  const { width, height, user, onQuery} = props;
+  const { width, height, user, file, setFile, source, setSource} = props;
 
   const inputRef = React.useRef();
 
-  const [source, setSource] = React.useState();
-
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
+    
+    const url = URL.createObjectURL(event.target.files[0]);
+    setSource(url);
+  };
 
   const handleChoose = (event) => {
     inputRef.current.click();
-  };
-
-  const handleChange = (event) => {
-
-    const file = event.target.files[0];
-    console.log(file.name);
-    onQuery(file);
-    const url = URL.createObjectURL(file);
-    setSource(url);
-      
   };
 
   return (
@@ -32,8 +24,16 @@ export default function VideoInput(props) {
         type="file"
         onChange={handleChange}
         accept=".mov,.mp4"
-      />
-      {/* {!source && <button onClick={handleChoose}>Choose</button>} */}
+              />
+      {!source && <button onClick={handleChoose}>Choose File</button>}
+      {source && 
+          <div class="file">
+            <h2>Current File:</h2>
+            <div>{file.name}</div>
+            <button className='remove'  onClick={handleChoose}>Change File</button>
+        
+        </div>}
+      
       {source && (
         <video
           className="VideoInput_video"

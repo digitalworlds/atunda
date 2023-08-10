@@ -5,7 +5,6 @@
   
   .VideoInput {
     display: flex;
-    flex-direction: column;
     /* overflow: scroll; */
     width: 100%;
     max-width: 100%;
@@ -17,22 +16,16 @@
   }
   
   .VideoInput_input {
-    display: flex;
-    align-items: center;
-    margin: 7px 0;
-    margin-right: 10px;
-    padding: 0 10px;
-    padding-right: 5px;
-    background-color: grey;
-    white-space: nowrap;
-    color: white;
+    opacity:0;
+    height:0;
+    width:0;
   }
   
   .VideoInput_video {
+    width:fit-content;
     background-color: grey;
-    display: block;
     margin: 0;
-    padding-bottom: 5px;
+    padding: 5px;
   }
   
   
@@ -80,4 +73,22 @@
     background-color: unset;
     cursor: pointer;
     color: white;
+  }
+
+
+
+  .file {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    align-content: space-between;
+    padding: 5px;
+    width: 100%;
+  }
+
+  .file button {
+    padding: 5%;
+    margin:auto;
+    border-radius: 10%;
+    background-color: darkgrey;
   }
