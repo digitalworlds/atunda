@@ -59,4 +59,30 @@ class VideoUploadViewSet(generics.ListCreateAPIView):
             new_file.path = mp4_path
             new_file.save()
     
+class UpdateVideoTitle(APIView):
+    
+    permission_classes = [permissions.IsAuthenticated]
+
+    def patch(self, request, pk, format=None):
+
+        # Attempts to get the video object associated with that pk
+        try:
+          video = videoUpload.objects.get(pk=pk)
+        except videoUpload.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
         
+        # If the owner of that video is not the user making the request returns error
+        if video.owner != self.request.user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        # Only allows edits to title or tags properties
+        if "path" in request.data or "owner" in request.data or "owner_id" in request.data or "created" in request.data:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        # Updates the title/tags properties
+        serialzer = VideoUploadSerializer(video, data=request.data, partial=True)
+
+        if serialzer.is_valid():
+            serialzer.save()
+            return Response(serialzer.data)
+        return Response(serialzer.errors, status=status.HTTP_400_BAD_REQUEST)
