@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
+import VideoTile from "./VideoTile";
 
 export default function VideoDisplay({user}) {
-  const [videosArray, setVideosArray] = useState();
+  const [videosArray, setVideosArray] = useState([]);
   
   useEffect(() => {
     const config = {
@@ -21,6 +22,13 @@ export default function VideoDisplay({user}) {
   }, [user])
 
   return (
-    <div></div>
+    <ul>
+      {videosArray.map((video) => {
+        console.log(video);
+        return(
+          <VideoTile videoData={video} />
+        )
+      })}
+    </ul>
   )
 }

@@ -18,7 +18,7 @@ html, body {
 }
 
 .App {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   font-family: sans-serif;
 }
