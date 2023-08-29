@@ -18,7 +18,7 @@ html, body {
 }
 
 .App {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   font-family: sans-serif;
 }
@@ -77,7 +77,8 @@ html, body {
   .VideoInput_video {
     height: auto;
     max-height: 40vh;
-    width: fit-content;
+    width: -moz-fit-content;
+    width: fit-content; 
     max-width: 98%;
     margin: auto;
     margin-left: 0;
@@ -97,7 +98,7 @@ html, body {
   .container {
     margin: 1%;
     display: flex;
-    overflow: scroll;
+    /* overflow: scroll; */
     width: 98%;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
