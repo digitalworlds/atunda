@@ -26,7 +26,7 @@ export default function VideoDisplay({user}) {
       {videosArray.map((video) => {
         console.log(video);
         return(
-          <VideoTile videoData={video} />
+          <VideoTile videoData={video} user={user} />
         )
       })}
     </ul>
