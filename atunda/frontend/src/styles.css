@@ -26,7 +26,7 @@ html, body {
   .Header {
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 98%;
     height: 10vh;
     display: flex;
     background-color: var(--main-header-color);

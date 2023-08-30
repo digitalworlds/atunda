@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
 
-export default function GoogleLogin({setUser}) {
+export default function GoogleLogin({setUser, setStatus}) {
   async function handleCallbackResponse(response) {
     const config = {
       method: "post",
@@ -13,6 +13,11 @@ export default function GoogleLogin({setUser}) {
     };
     const res = await axios(config);
     console.log(res);
+    if (res.data.access) {
+      setStatus('profile');
+      console.log('login successful');
+    }
+
     setUser(res.data);
   }
 

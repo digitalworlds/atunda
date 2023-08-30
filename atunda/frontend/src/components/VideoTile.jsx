@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
+import "../styles.css";
 
 export default function VideoTile({videoData, user}) {
   const [tags, setTags] = useState(videoData.tags.split(","));
