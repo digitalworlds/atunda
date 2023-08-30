@@ -23,7 +23,7 @@ function App() {
       <div>
         <div className="App">
           <Header success={success} user={user} status={status} setStatus={setStatus}></Header>
-          {/* <VideoDisplay user={user} /> */}
+          <Profile user={user} />
         </div>
       </div>
     )

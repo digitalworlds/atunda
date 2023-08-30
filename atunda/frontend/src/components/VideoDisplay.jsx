@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
 import VideoTile from "./VideoTile";
-import "../styles.css";
 
 export default function VideoDisplay({user}) {
   const [videosArray, setVideosArray] = useState([]);

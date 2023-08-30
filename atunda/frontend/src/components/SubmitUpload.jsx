@@ -7,7 +7,7 @@ export default function SubmitUpload(props) {
   const { width, height, user, file, setFile, source, setSource, tags, setTags, setSuccess} = props;
   async function handleSubmit (event) {
     let formData = new FormData();
-    formData.append('title', file.name);
+    formData.append('title', file.name.substring(0, file.name.length - 4));
     formData.append('path', file);
     formData.append('tags', tags);
     const config = {

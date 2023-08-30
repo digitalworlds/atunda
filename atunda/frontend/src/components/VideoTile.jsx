@@ -27,31 +27,38 @@ export default function VideoTile({videoData, user}) {
     setEditMode(false);
   }
 
+  return(
+    <div class='profile-videos' id={videoData.id}>
+      <video>
+        <source src={videoData.path}></source>
+      </video>
+    </div>
+  )
 
-  if (!editMode) {
-    return(
-      <li id={videoData.id}>
-        <div>{videoData.title}</div>
-        <video controls>
-          <source src={videoData.path}></source>
-        </video>
-        <div>Tags: {tags}</div>
-        <button onClick={() => setEditMode(true)}>Edit</button>
-      </li>
-    )
-  } else {
-    return (
-      <li id={videoData.id}>
-        <label>New Title</label>
-        <input type="text" onChange={(e) => {setTitle(e.target.value)}}></input>
-        <video controls>
-          <source src={videoData.path}></source>
-        </video>
-        <label>New Tags</label>
-        <input type="text" onChange={(e) => {setTags(e.target.value)}}></input>
-        <button onClick={handleSubmit}>Submit Edit</button>
-      </li>
-    )
-  }
+  // if (!editMode) {
+  //   return(
+  //     <li id={videoData.id}>
+  //       <div>{videoData.title}</div>
+  //       <video class='profile-videos' controls>
+  //         <source src={videoData.path}></source>
+  //       </video>
+  //       <div>Tags: {tags}</div>
+  //       <button onClick={() => setEditMode(true)}>Edit</button>
+  //     </li>
+  //   )
+  // } else {
+  //   return (
+  //     <li id={videoData.id}>
+  //       <label>New Title</label>
+  //       <input type="text" onChange={(e) => {setTitle(e.target.value)}}></input>
+  //       <video controls>
+  //         <source src={videoData.path}></source>
+  //       </video>
+  //       <label>New Tags</label>
+  //       <input type="text" onChange={(e) => {setTags(e.target.value)}}></input>
+  //       <button onClick={handleSubmit}>Submit Edit</button>
+  //     </li>
+  //   )
+  // }
   
 }

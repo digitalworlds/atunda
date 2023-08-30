@@ -13,14 +13,16 @@
 html, body {
     padding: 0;
     margin: 0;
-    overflow: hidden;
     background-color: var(--main-bg-color);
+    scroll-snap-type: y mandatory;
+    scroll-padding: 1vh;
 }
 
 .App {
   /* position: fixed; */
   width: 100%;
   font-family: sans-serif;
+  
 }
 
   .Header {
@@ -245,6 +247,20 @@ h2 {
   transform: scale(1.2);
 }
 
+.profile-videos-container {
+  margin-top: 35vh;
+  display: grid;
+  grid-template: 'profile-videos profile-videos profile-videos';
+  justify-items: center;
+}
+
+.profile-videos video{
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  border-radius: 7px;
+  width: 30vw;
+  scroll-snap-align: end;
+}
 
 
 

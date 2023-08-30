@@ -1,7 +1,7 @@
 
 import React from "react";
 
-export default function VideoInput(props) {
+export default function Header (props) {
     const {user, success, status, setStatus} = props;
 
     const handleUpload = (event) => {    
@@ -23,7 +23,7 @@ export default function VideoInput(props) {
                 <h1 class='page-button' onClick={handleProfile}>Profile</h1>
             }
             {/* <h1>{user.first_name + " " +  user.last_name}</h1> */}
-            <img className="Profile" src={user.profile_pic}></img>
+            <img className="Profile" src={user.profile_pic} draggable='false'></img>
         </div>
     )
 }
