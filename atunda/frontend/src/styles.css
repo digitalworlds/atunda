@@ -13,7 +13,7 @@
 html, body {
     padding: 0;
     margin: 0;
-    overflow: scroll;
+    overflow: hidden;
     background-color: var(--main-bg-color);
 }
 
@@ -37,8 +37,8 @@ html, body {
     border-left: 0px;
     border-right: 0px;
     border-style: solid;
+    user-select: none;
   }
-
 
   
   .Success {
@@ -98,11 +98,11 @@ html, body {
   .container {
     margin: 1%;
     display: flex;
-    /* overflow: scroll; */
+    overflow-x: auto;
     width: 98%;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
   }
+
+
   
   .container input {
     width: 100%;
@@ -234,4 +234,22 @@ h2 {
   margin-right: 0;
   margin-left: 20px;
 }
+
+.page-button {
+  transform: scale(1);
+  transition: .15s;
+}
+
+.page-button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
 
