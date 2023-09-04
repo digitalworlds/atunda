@@ -2,7 +2,6 @@ import GoogleLogin from "./components/GoogleLogin";
 import VideoInput from "./components/VideoInput";
 import TagsInput from "./components/TagsInput";
 import SubmitUpload from "./components/SubmitUpload";
-import VideoDisplay from "./components/VideoDisplay";
 import Header from "./components/Header";
 import Profile from "./components/Profile";
 import { useState, React } from "react";

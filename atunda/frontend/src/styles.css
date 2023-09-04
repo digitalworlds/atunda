@@ -8,223 +8,225 @@
   --secondary-button-color: #4B88BD;
   --secondary-text-color: white;
   --tertiary-text-color: grey;
+  --video-background-color: rgba(10, 10, 10, 0.481);
+  --video-overlay-color: rgba(150, 150, 150, 0.747);
 }
 
-html, body {
-    padding: 0;
-    margin: 0;
-    background-color: var(--main-bg-color);
-    scroll-snap-type: y mandatory;
-    scroll-padding: 1vh;
+
+html {
+  padding: 0;
+  margin: 0;
+  background-color: var(--main-bg-color);
+}
+
+body {
+  padding: 0;
+  margin: 0;
 }
 
 .App {
-  /* position: fixed; */
-  width: 100%;
-  font-family: sans-serif;
-  
+  font-family: sans-serif;  
 }
 
-  .Header {
-    position: fixed;
-    top: 0;
-    width: 98%;
-    height: 10vh;
-    display: flex;
-    background-color: var(--main-header-color);
-    padding: 1%;
-    border-color: var(--secondary-header-color);
-    border-bottom-width: 0.7vh;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-style: solid;
-    user-select: none;
-  }
+.Header {
+  position: fixed;
+  top: 0;
+  width: 98%;
+  height: 6vh;
+  display: flex;
+  background-color: var(--main-header-color);
+  padding: 1%;
+  border-color: var(--secondary-header-color);
+  border-bottom-width: 0.7vh;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  border-style: solid;
+  user-select: none;
+  z-index: 1;
+}
 
   
-  .Success {
-    margin:auto;
-    margin-left: 10%;
-    color: lightgreen;
-  }
+.Success {
+  margin:auto;
+  margin-left: 10%;
+  color: lightgreen;
+}
 
-  .Unsuccess {
-    margin:auto;
-    margin-left: 10%;
-    color: red;
-  }
+.Unsuccess {
+  margin:auto;
+  margin-left: 10%;
+  color: red;
+}
 
+.VideoInput {
+  margin: 1%;
+  display: flex;
+  justify-content: space-between;
+  justify-content: left;
+  overflow: hidden;
+  scroll-behavior: none;
+  width: 98%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-top: 17vh;
+}
+
+  
+
+.VideoInput_input {
+  opacity:0;
+  height:0;
+  width:0;
+}
+
+.VideoInput_video {
+  height: auto;
+  max-height: 40vh;
+  width: -moz-fit-content;
+  width: fit-content; 
+  max-width: 98%;
+  margin: auto;
+  margin-left: 0;
+  padding: 5px;
+
+}
+@media ( device-width < 780px) {
   .VideoInput {
-    margin: 1%;
-    display: flex;
-    justify-content: space-between;
-    justify-content: left;
-    overflow: hidden;
-    scroll-behavior: none;
-    width: 98%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    margin-top: 17vh;
+    flex-direction: column;
   }
-
-  
-  
-  .VideoInput_input {
-    opacity:0;
-    height:0;
-    width:0;
-  }
-  
   .VideoInput_video {
-    height: auto;
-    max-height: 40vh;
-    width: -moz-fit-content;
-    width: fit-content; 
-    max-width: 98%;
-    margin: auto;
-    margin-left: 0;
-    padding: 5px;
-
+    margin:auto;
   }
-  @media ( device-width < 780px) {
-    .VideoInput {
-      flex-direction: column;
-    }
-    .VideoInput_video {
-      margin:auto;
-    }
-  }
-  
-  
-  .container {
-    margin: 1%;
-    display: flex;
-    overflow-x: auto;
-    width: 98%;
-  }
-
-
-  
-  .container input {
-    width: 100%;
-    min-width: 50%;
-    border: none;
-    border-radius: 5px;
-    padding: 14px;
-    padding-left: 14px;
-    background-color: var(--main-button-color);
-    outline: 0;
-    color: var(--secondary-text-color);
-    
-  }
-
-  ::placeholder {
-    color: var(--tertiary-text-color);
-  }
-
-  
-  .tag {
-    display: flex;
-    align-items: center;
-    margin: 7px 0;
-    margin-right: 10px;
-    border-radius: 5px;
-    background-color: var(--main-button-color);
-    white-space: nowrap;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    color: var(--secondary-text-color);
-  }
+}
   
 
-  .tag:hover {
-    background-color: var(--secondary-button-color);
-  }
+.container {
+  margin: 1%;
+  display: flex;
+  overflow-x: auto;
+  width: 98%;
+}
 
-  .file {
-    width: 98%;
-  }
 
+
+.container input {
+  width: 100%;
+  min-width: 50%;
+  border: none;
+  border-radius: 5px;
+  padding: 14px;
+  padding-left: 14px;
+  background-color: var(--main-button-color);
+  outline: 0;
+  color: var(--secondary-text-color);
+  
+}
+
+::placeholder {
+  color: var(--tertiary-text-color);
+}
+
+  
+.tag {
+  display: flex;
+  align-items: center;
+  margin: 7px 0;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: var(--main-button-color);
+  white-space: nowrap;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+}
+
+
+.tag:hover {
+  background-color: var(--secondary-button-color);
+}
+
+.file {
+  width: 98%;
+}
+
+.current_file {
+  height: 30%;
+  display: flex;
+  overflow: wrap;
+  align-content: space-between;
+  padding: 5px;
+  width: 100%;
+  color: var(--secondary-text-color);
+}
+
+@media (780px < device-width < 940px) {
   .current_file {
-    height: 30%;
-    display: flex;
-    overflow: wrap;
-    align-content: space-between;
-    padding: 5px;
-    width: 100%;
-    color: var(--secondary-text-color);
-  }
-
-  @media (780px < device-width < 940px) {
-    .current_file {
-      flex-direction: column;
+    flex-direction: column;
   }
 }
 
-  @media (device-width < 400px) {
-    .current_file {
-      flex-direction: column;
+@media (device-width < 400px) {
+  .current_file {
+    flex-direction: column;
   }
+}
 
+.current_file button {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin:auto;
+  margin-left: 5%;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-button-color);
+  color: var(--secondary-text-color);
+  cursor: pointer;
+}
 
-    
-  }
-  .current_file button {
-    padding: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin:auto;
-    margin-left: 5%;
-    border-radius: 5px;
-    border: none;
-    background-color: var(--main-button-color);
-    color: var(--secondary-text-color);
-    cursor: pointer;
-  }
+.current_file button:hover {
+  background-color: var(--secondary-button-color);
+}
 
-  .current_file button:hover {
-    background-color: var(--secondary-button-color);
-  }
+.SubmitUpload button{
+  color: var(--secondary-text-color);
+  font-size: xx-large;
+  width: 80%;
+  margin: 10%;
+  margin-top: 5%;
+  padding: 3%;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-button-color);
+  cursor: pointer;
+}
 
-  .SubmitUpload button{
-    color: var(--secondary-text-color);
-    font-size: xx-large;
-    width: 80%;
-    margin: 10%;
-    margin-top: 5%;
-    padding: 3%;
-    border-radius: 5px;
-    border: none;
-    background-color: var(--main-button-color);
-    cursor: pointer;
-  }
-
-  .SubmitUpload button:hover {
-    background-color: var(--secondary-button-color);
-  }
+.SubmitUpload button:hover {
+  background-color: var(--secondary-button-color);
+}
 
 
 .Profile {
-    margin-left: 5%;
-    border-radius: 100px;
+  margin-left: 5%;
+  border-radius: 100px;
 }
 
 h1 {
-    margin-top: auto;
-    margin-bottom: auto;
-    color: var(--main-text-color);
+  margin-top: auto;
+  margin-bottom: auto;
+  color: var(--main-text-color);
 }
 
 .filebutton {
-    padding: 10px;
-    margin-left: 0;
-    background-color: var(--main-button-color);
-    border: none;
-    border-radius: 5px;
-    color: var(--secondary-text-color);
-    cursor: pointer;
+  padding: 10px;
+  margin-left: 0;
+  background-color: var(--main-button-color);
+  border: none;
+  border-radius: 5px;
+  color: var(--secondary-text-color);
+  cursor: pointer;
 }
 
 .filebutton:hover {
@@ -247,25 +249,75 @@ h2 {
   transform: scale(1.2);
 }
 
+.profile-videos-searchbar {
+  margin-top: 40vh;
+}
+
 .profile-videos-container {
-  margin-top: 35vh;
+  width: 90vw;
+  margin: auto;
+  margin-top: 5vh;
   display: grid;
-  grid-template: 'profile-videos profile-videos profile-videos';
+  grid-template: 'profile-videos profile-videos profile-videos profile-videos';
   justify-items: center;
+  height: 55vh;
+  overflow-y: scroll;
+  z-index: 10;
+
+}
+
+.profile-videos {
+  position: relative;
+  height: 100%;
+
 }
 
 .profile-videos video{
+  aspect-ratio: 16/9;
   margin-top: 1vh;
   margin-bottom: 1vh;
   border-radius: 7px;
-  width: 30vw;
-  scroll-snap-align: end;
+  width: 20vw;
+  /* scroll-snap-align: end; */
+  background-color: var(--video-background-color);
 }
 
+.overlayText {
+  margin-top: 1vh;
+  background-color: var(--video-overlay-color);
+  height: 25%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20vw;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+}
 
+#topText {
+  margin-top: 0;
+}
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: var(--main-header-color); */
+  
+}
 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-header-color);
+  border-radius: 5px;
+}
 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-header-color);
+}
 
 

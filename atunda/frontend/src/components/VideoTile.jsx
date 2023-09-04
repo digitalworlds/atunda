@@ -8,30 +8,33 @@ export default function VideoTile({videoData, user}) {
   const [title, setTitle] = useState(videoData.title);
   const [editMode, setEditMode] = useState(false);
 
-  async function handleSubmit(e) {
-    console.log(title, tags);
-    e.preventDefault();
-    const config = {
-      url: APPURL + `/api/video/update/${videoData.id}/`,
-      method: "PATCH",
-      headers: {
-        "Authorization": "Bearer " + user.access
-      },
-      data: {
-        "title": title,
-        "tags": tags,
-      }
-    };
-    const res = await axios(config);
-    console.log(res);
-    setEditMode(false);
-  }
+  // async function handleSubmit(e) {
+  //   console.log(title, tags);
+  //   e.preventDefault();
+  //   const config = {
+  //     url: APPURL + `/api/video/update/${videoData.id}/`,
+  //     method: "PATCH",
+  //     headers: {
+  //       "Authorization": "Bearer " + user.access
+  //     },
+  //     data: {
+  //       "title": title,
+  //       "tags": tags,
+  //     }
+  //   };
+  //   const res = await axios(config);
+  //   console.log(res);
+  //   setEditMode(false);
+  // }
 
   return(
     <div class='profile-videos' id={videoData.id}>
       <video>
         <source src={videoData.path}></source>
       </video>
+      <div class="overlayText">
+          <p id="topText">{title}</p>
+      </div>
     </div>
   )
 

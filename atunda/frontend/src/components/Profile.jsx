@@ -29,14 +29,21 @@ export default function Profile (props) {
 
 
     return (
-        <div class='profile-videos-container'>
-            {videosArray.map((video) => {
-                console.log(video);
-                return(
-                <VideoTile videoData={video} user={user} />
-                )
-            })}
-        </div>
+      <div>
+          <div class='profile-input'> 
+            <input class="profile-videos-searchbar" value={searchInput} placeholder="Search">
+            </input>
+          </div>
+          <div class='profile-videos-container'>
+              {videosArray.filter(video => video.includes(searchInput)).map((video) => {
+                  console.log(video);
+                  return(
+                  <VideoTile videoData={video} user={user} />
+                  )
+              })}
+          </div>
+      </div>
+        
     )
 }
 
