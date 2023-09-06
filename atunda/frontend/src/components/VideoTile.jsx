@@ -1,12 +1,7 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { APPURL } from "../DjangoUrl";
+import { useEffect, useState, useRef } from "react";
 import "../styles.css";
 
-export default function VideoTile({videoData, user}) {
-  const [tags, setTags] = useState(videoData.tags.split(","));
-  const [title, setTitle] = useState(videoData.title);
-  const [editMode, setEditMode] = useState(false);
+export default function VideoTile({videoData, user, hidden}) {
 
   // async function handleSubmit(e) {
   //   console.log(title, tags);
@@ -27,13 +22,30 @@ export default function VideoTile({videoData, user}) {
   //   setEditMode(false);
   // }
 
+  const videoRef = useRef();
+  useEffect(() => {    
+    videoRef.current?.load();
+  }, [videoData.path]);
+
+  if (hidden == 'false') {
+    return(
+      <div className='profile-videos' id={videoData.id}>
+        <video ref={videoRef}>
+          <source src={videoData.path}></source>
+        </video>
+        <div className="overlayText">
+            <h2 id="topText">{videoData.title}</h2>
+        </div>
+      </div>
+    )
+  }
   return(
-    <div class='profile-videos' id={videoData.id}>
-      <video>
+    <div className='profile-videos' id={videoData.id} hidden>
+      <video ref={videoRef} controls>
         <source src={videoData.path}></source>
       </video>
-      <div class="overlayText">
-          <p id="topText">{title}</p>
+      <div className="overlayText">
+          <p id="topText">{videoData.title}</p>
       </div>
     </div>
   )

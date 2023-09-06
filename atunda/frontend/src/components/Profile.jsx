@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
-import VideoTile from "./VideoTile";
-
+import VideoDisplay from "./VideoDisplay";
 
 
 export default function Profile (props) {
     const {user, videoData} = props;
 
-    const [searchInput, setSearchInput] = useState('');
-
     const [videosArray, setVideosArray] = useState([]);
+
+    const[filteredVideosArray, setFilteredVideosArray] = useState([]);
   
     useEffect(() => {
       const config = {
-        url: APPURL + "/api/video/",
+        url: APPURL + "api/video/",
         method: "GET",
         headers: {
           "Authorization": "Bearer " + user.access
@@ -24,24 +23,28 @@ export default function Profile (props) {
       axios(config).then((res) => {
         console.log(res.data);
         setVideosArray(res.data);
+        setFilteredVideosArray(res.data);
       })
     }, [user])
+
+    const handleChange = (e) => {
+      e.preventDefault();
+      console.log('hi');
+      console.log(videosArray);
+      console.log(videosArray.filter(video => video.title.includes(e.target.value)));
+      setFilteredVideosArray(videosArray.filter(video => video.title.includes(e.target.value)));
+      
+    }
 
 
     return (
       <div>
           <div class='profile-input'> 
-            <input class="profile-videos-searchbar" value={searchInput} placeholder="Search">
+            <input class="profile-videos-searchbar" onChange={handleChange} placeholder="Search">
             </input>
           </div>
-          <div class='profile-videos-container'>
-              {videosArray.filter(video => video.includes(searchInput)).map((video) => {
-                  console.log(video);
-                  return(
-                  <VideoTile videoData={video} user={user} />
-                  )
-              })}
-          </div>
+          
+          <VideoDisplay id='videoDisplay' unfiltered={videosArray} videosArray={filteredVideosArray} user={user} />
       </div>
         
     )
