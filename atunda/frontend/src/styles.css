@@ -248,7 +248,8 @@ h2 {
 
 .page-button:hover {
   cursor: pointer;
-  transform: scale(1.2);
+  transform: scale(0.8);
+  color: var(--video-overlay-color);
 }
 
 .profile-videos-searchbar {
@@ -295,8 +296,8 @@ h2 {
   background-color: var(--video-background-color);
 }
 
-.profile-videos video:hover {
-
+.profile-videos:hover {
+  transform: scale(0.9);
 }
 
 .overlayText {
@@ -345,3 +346,26 @@ h2 {
   text-align: center;
 }
 
+.edit-video-container {
+  padding-top: 3vh;
+  margin-top: 10vh;
+  display: flex;
+}
+
+.edit-video-content {
+  margin-left: 5vw;
+  flex-grow: 1;
+  color: var(--main-text-color);
+}
+
+.edit-video {
+  margin-right: 5vw;
+  width: 40vw;
+  aspect-ratio: 16/9;
+  border-radius: 7px;
+  background-color: var(--video-background-color);
+}
+
+.edit-video-footer {
+  display: flex;
+}

@@ -2,10 +2,11 @@
 import React from "react";
 
 export default function Header (props) {
-    const {user, success, status, setStatus} = props;
+    const {user, success, status, setStatus, setTags} = props;
 
     const handleUpload = (event) => {    
         setStatus('upload');
+        setTags([]);
     }
 
     const handleProfile = (event) => {    

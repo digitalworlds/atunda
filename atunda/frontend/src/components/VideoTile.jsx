@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles.css";
 
-export default function VideoTile({videoData, user, hidden}) {
+export default function VideoTile({videoData, hidden, setEditVideo, tags, setTags}) {
 
   // async function handleSubmit(e) {
   //   console.log(title, tags);
@@ -22,6 +22,12 @@ export default function VideoTile({videoData, user, hidden}) {
   //   setEditMode(false);
   // }
 
+  const handleClick = (e) => {
+    setEditVideo([true, videoData]);
+    const tagsCopy = [videoData.tags];
+    setTags(tagsCopy);
+  };
+
   const videoRef = useRef();
   useEffect(() => {    
     videoRef.current?.load();
@@ -29,7 +35,7 @@ export default function VideoTile({videoData, user, hidden}) {
 
   if (hidden == 'false') {
     return(
-      <div className='profile-videos' id={videoData.id}>
+      <div className='profile-videos' id={videoData.id} onClick={handleClick}>
         <video ref={videoRef}>
           <source src={videoData.path}></source>
         </video>
@@ -40,7 +46,7 @@ export default function VideoTile({videoData, user, hidden}) {
     )
   }
   return(
-    <div className='profile-videos' id={videoData.id} hidden>
+    <div className='profile-videos' id={videoData.id} hidden onClick={handleClick}>
       <video ref={videoRef} controls>
         <source src={videoData.path}></source>
       </video>

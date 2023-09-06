@@ -17,35 +17,21 @@ function App() {
   const [status, setStatus] = useState('login');
  
 
-  if (status === 'profile') {
+  if (status === 'profile' || status ==='upload') {
     return (
       <div>
         <div className="App">
-          <Header success={success} user={user} status={status} setStatus={setStatus}></Header>
-          <Profile user={user} />
+          <Header success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
+          <Profile user={user} tags={tags} setTags={setTags} status={status} setStatus={setStatus}  file={file} setFile={setFile} source={source} setSource={setSource} />
         </div>
       </div>
     )
-  } else if (status === 'upload') {
-    return (
-      <div>
-        <div className="App">
-          
-          <Header success={success} user={user} status={status} setStatus={setStatus}></Header>
-          <VideoInput setSuccess={setSuccess} file={file} setFile={setFile} source={source} setSource={setSource} user={user} width={400} height={300} />
-          <TagsInput setSuccess={setSuccess} tags={tags} setTags={setTags} user={user} width={400} height={300} />
-          <SubmitUpload setSuccess={setSuccess} file={file} setFile={setFile} source={source} setSource={setSource} tags={tags} setTags={setTags} user={user} width={400} height={300} />
-          
-        </div>
-      </div>
-    )
-  } else if (status === 'login') {
+  } 
     return (
       <div>
         <GoogleLogin setStatus={setStatus} setUser={setUser} />
       </div>
     )
-  }
 }
 
 export default App;
