@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from api.models import videoUpload
+from api.models import videoUpload, userPermissions
 from rest_framework import generics
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from rest_framework import permissions
-from api.serializers import UserSerializer,CreateUserSerializer, VideoUploadSerializer
+from api.serializers import UserSerializer,CreateUserSerializer, VideoUploadSerializer, UserPermissionsSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -86,3 +86,64 @@ class UpdateVideoTitle(APIView):
             serialzer.save()
             return Response(serialzer.data)
         return Response(serialzer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DeleteVideo(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    # Retrieves the video with the input id (pk) and deletes if the request user and video owner match
+    def delete(self, request, pk, format=None):
+        try:
+          video = videoUpload.objects.get(pk=pk)
+        except:
+          return Response(status=status.HTTP_404_NOT_FOUND)
+
+        if video.owner != self.request.user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        try:
+            video.delete()
+            return Response(status=status.HTTP_201_CREATED)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+# # class Temp(APIView):
+#     permission_classes = [permissions.IsAuthenticated]
+
+#     def get(self, request):
+#         user = request.user
+#         user_permissions = user.user_permissions.all()
+#         permission_names = [permissions.name for permission in user_permissions]
+#         return Response({'permissions': permission_names}, status=status.HTTP_200_OK)
+
+#     def post(self, request):
+#         user = request.user
+#         codenames = request.codenames
+#         for codename in codenames:
+#             curr_permission = Permission.objects.get(codename=codename)
+#             user.user_permissions.add(curr_permission)
+#         return Response({'permissions': codenames}, status=status.HTTP_201_CREATED)
+
+
+class UserPermissions(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    # Gets the permissions model for the request's user
+    def get(self, request):
+        user = request.user
+        user_permissions = userPermissions.objects.filter(user=user)[0]
+        permissions_serializer = UserPermissionsSerializer(user_permissions)
+        return Response(permissions_serializer.data, status=status.HTTP_200_OK)
+
+    # Sets the permissions for the request's user
+    def post(self, request):
+        user = request.user
+        data = request.data
+        user_permissions = userPermissions.objects.get_or_create(user=user)[0]
+        user_permissions.allow_for_model = True if data['allow_for_model'] == "true" else False
+        user_permissions.allow_for_dataset = True if data['allow_for_dataset'] == "true" else False
+        user_permissions.save()
+
+        permissions_serializer = UserPermissionsSerializer(user_permissions)
+
+        return Response(permissions_serializer.data, status=status.HTTP_201_CREATED)

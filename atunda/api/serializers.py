@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import videoUpload
+from api.models import videoUpload, userPermissions
 from django.contrib.auth.models import User
 
 class VideoUploadSerializer(serializers.ModelSerializer):
@@ -39,3 +39,10 @@ class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+class UserPermissionsSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.email')
+    user_id = serializers.ReadOnlyField(source='user.id')
+    class Meta:
+        model = userPermissions
+        fields = ['user', 'user_id','allow_for_model', 'allow_for_dataset']

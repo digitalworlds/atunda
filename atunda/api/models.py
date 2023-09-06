@@ -18,3 +18,12 @@ class videoUpload(models.Model):
     # need to be uploaded in the form of tag1,tag2,tag3,tag4,...,tagn
     tags = models.CharField(max_length=200, blank=False, null=False)
     created = models.DateTimeField(auto_now_add=True)
+
+
+class userPermissions(models.Model):
+    # Each permission set is associated with one user
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # Permission for allowing videos to be used in AI model training
+    allow_for_model = models.BooleanField(default=False)
+    # Permission for allowing videos to be published in the dataset
+    allow_for_dataset = models.BooleanField(default=False)

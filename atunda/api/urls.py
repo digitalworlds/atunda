@@ -4,8 +4,10 @@ from api import views
 
 urlpatterns = [
     path('users/create/', views.CreateUser.as_view(), name='create_user'),
+    path('video/delete/<int:pk>/', views.DeleteVideo.as_view(), name='delete_video'),
     path('video/update/<int:pk>/', views.UpdateVideoTitle.as_view(), name='update_video'),
     path('video/', views.VideoUploadViewSet.as_view(), name='video_viewset'),
+    path('permissions/', views.UserPermissions.as_view(), name='user_permissions'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
