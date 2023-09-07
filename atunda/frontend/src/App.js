@@ -22,7 +22,7 @@ function App() {
       <div>
         <div className="App">
           <Header success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
-          <Profile user={user} tags={tags} setTags={setTags} status={status} setStatus={setStatus}  file={file} setFile={setFile} source={source} setSource={setSource} />
+          <Profile user={user} tags={tags} setTags={setTags} status={status} setStatus={setStatus}  file={file} setFile={setFile} source={source} setSource={setSource} setSuccess={setSuccess} />
         </div>
       </div>
     )
