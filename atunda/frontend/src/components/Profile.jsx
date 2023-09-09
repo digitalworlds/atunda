@@ -31,7 +31,7 @@ export default function Profile (props) {
         setVideosArray(res.data);
         setFilteredVideosArray(res.data);
       })
-    }, [user])
+    }, [user, status])
 
     const handleChange = (e) => {
       e.preventDefault();
