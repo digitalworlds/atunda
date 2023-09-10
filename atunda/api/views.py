@@ -10,6 +10,7 @@ from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.conf import settings
 import moviepy.editor as moviepy
+from api.pose_detection import get_pose_array
 
 # Create your views here.
 class CreateUser(APIView):
@@ -47,17 +48,17 @@ class VideoUploadViewSet(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         new_file = serializer.save(owner=self.request.user)
         extension_index, file_type = find_video_type(str(new_file.path))
-        if file_type != "mp4":
-            video_path = str(settings.BASE_DIR)[:-6] + 'atunda/media/'
-            print(video_path)
-            mp4_path = str(new_file.path)[:extension_index+1] + "mp4"
+        # if file_type != "mp4":
+        #     video_path = str(settings.BASE_DIR)[:-6] + 'atunda/media/'
+        #     print(video_path)
+        #     mp4_path = str(new_file.path)[:extension_index+1] + "mp4"
             
-            # Video conversion commented out for testing purposes. 
-            clip = moviepy.VideoFileClip(video_path + str(new_file.path))
-            clip.write_videofile(video_path + mp4_path)
+        #     # Video conversion commented out for testing purposes. 
+        #     clip = moviepy.VideoFileClip(video_path + str(new_file.path))
+        #     clip.write_videofile(video_path + mp4_path)
             
-            new_file.path = mp4_path
-            new_file.save()
+        #     new_file.path = mp4_path
+        #     new_file.save()
     
 class UpdateVideoTitle(APIView):
     
@@ -147,3 +148,29 @@ class UserPermissions(APIView):
         permissions_serializer = UserPermissionsSerializer(user_permissions)
 
         return Response(permissions_serializer.data, status=status.HTTP_201_CREATED)
+
+class AddPoseDetection(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        data = request.data
+        video = videoUpload.objects.filter(path=f"videos/{data['input']}")
+
+        if len(video) == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        video = video[0]
+
+        if video.owner != user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        video.is_pose_processing = True
+        video.save()
+
+        temp = get_pose_array(f"./media/{video.path}", f"./media/pose/{data['output']}", "./api/pose_landmarks/pose_landmarker.task")
+
+        video.is_pose_processing = False
+        video.save()
+
+        return Response(status=status.HTTP_201_CREATED)
+        

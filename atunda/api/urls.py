@@ -8,6 +8,7 @@ urlpatterns = [
     path('video/update/<int:pk>/', views.UpdateVideoTitle.as_view(), name='update_video'),
     path('video/', views.VideoUploadViewSet.as_view(), name='video_viewset'),
     path('permissions/', views.UserPermissions.as_view(), name='user_permissions'),
+    path('pose/', views.AddPoseDetection.as_view(), name='add_pose'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
