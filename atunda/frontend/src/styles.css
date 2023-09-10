@@ -47,17 +47,54 @@ body {
 }
 
   
-.Success {
+.success-visible {
   margin:auto;
   margin-left: 10%;
   color: lightgreen;
+  
+  opacity: 1;
 }
 
-.Unsuccess {
+.success-fade {
+  margin:auto;
+  margin-left: 10%;
+  color: lightgreen;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  
+}
+
+.success-hidden {
+  margin:auto;
+  margin-left: 10%;
+  color: lightgreen;
+  opacity: 0;
+}
+
+.unsuccess-visible {
   margin:auto;
   margin-left: 10%;
   color: red;
+  
+  opacity: 1;
 }
+
+.unsuccess-fade {
+  margin:auto;
+  margin-left: 10%;
+  color: red;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  
+}
+
+.unsuccess-hidden {
+  margin:auto;
+  margin-left: 10%;
+  color: red;
+  opacity: 0;
+}
+
 
 .VideoInput {
   margin: 1%;

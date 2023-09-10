@@ -2,7 +2,8 @@
 import React from "react";
 
 export default function Header (props) {
-    const {user, success, status, setStatus, setTags} = props;
+    const {user, success, status, setStatus, setTags, fadeProp} = props;
+
 
     const handleUpload = (event) => {    
         setStatus('upload');
@@ -16,7 +17,7 @@ export default function Header (props) {
     return (
         <div className="Header">
             <h1 >Project ATUNDA</h1>
-            <div className="Success" >{success}</div>
+               <div className={fadeProp}>{success}</div>
             {status != 'upload' && 
                 <h1 class='page-button' onClick={handleUpload}>Upload</h1>
             }

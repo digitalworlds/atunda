@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
 import VideoDisplay from "./VideoDisplay";
@@ -7,9 +7,10 @@ import VideoInput from "./VideoInput";
 import SubmitUpload from "./SubmitUpload";
 import BackButton from "./BackButton";
 import SaveButton from "./SaveButton";
+import Header from "./Header"
 
 export default function Profile (props) {
-    const {user, videoData, tags, setTags, status, setStatus, file, setFile, source, setSource, success, setSuccess} = props;
+    const {user, tags, setTags, status, setStatus, file, setFile, source, setSource, success, setSuccess} = props;
 
     const [videosArray, setVideosArray] = useState([]);
 
@@ -17,6 +18,8 @@ export default function Profile (props) {
 
     const[editVideo, setEditVideo] = useState([false,'']);
   
+    const[fadeProp, setFadeProp] = useState('success-hidden');
+
     useEffect(() => {
       const config = {
         url: APPURL + "api/video/",
@@ -47,15 +50,17 @@ export default function Profile (props) {
     if (status === 'upload') {
       return(
         <div>
-          
-          <VideoInput setSuccess={setSuccess} file={file} setFile={setFile} source={source} setSource={setSource} user={user} width={400} height={300} />
-          <TagsInput setSuccess={setSuccess} tags={tags} setTags={setTags} user={user} width={400} height={300} />
-          <SubmitUpload setSuccess={setSuccess} file={file} setFile={setFile} source={source} setSource={setSource} tags={tags} setTags={setTags} user={user} width={400} height={300} />
+          <Header fadeProp={fadeProp} success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
+          <VideoInput file={file} setFile={setFile} source={source} setSource={setSource}/>
+          <TagsInput  tags={tags} setTags={setTags} />
+          <SubmitUpload setFadeProp={setFadeProp} setSuccess={setSuccess} file={file} setFile={setFile} setSource={setSource} tags={tags} setTags={setTags} user={user}/>
         </div>
       )};
     if (!editVideo[0]) {
       return (
+        
         <div>
+          <Header fadeProp={fadeProp} success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
             <div class='profile-input'> 
               <input class="profile-videos-searchbar" onChange={handleChange} placeholder="Search">
               </input>
@@ -67,6 +72,7 @@ export default function Profile (props) {
 
     return (
       <div>
+        <Header fadeProp={fadeProp} success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
         <div class={"edit-video-container"}>   
           <div class={"edit-video-content"}>
             <h2>Edit Video</h2>

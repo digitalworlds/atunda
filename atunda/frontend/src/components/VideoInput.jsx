@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function VideoInput(props) {
-  const { width, height, user, file, setFile, source, setSource, setSuccess} = props;
+  const {file, setFile, source, setSource} = props;
 
   const inputRef = React.useRef();
 
@@ -51,7 +51,7 @@ export default function VideoInput(props) {
         <video
           className="VideoInput_video"
           width="100%"
-          height={height}
+          // height={height}
           src={source}
           autoplay="autoplay"
           muted="muted"

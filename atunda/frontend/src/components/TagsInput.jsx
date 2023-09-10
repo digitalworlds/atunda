@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function TagsInput(props) {
-    const { width, height, user, tags, setTags, setSuccess} = props;
+    const {tags, setTags} = props;
 
     const [input, setInput] = React.useState('');
 

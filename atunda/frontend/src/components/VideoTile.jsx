@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "../styles.css";
 
-export default function VideoTile({videoData, hidden, setEditVideo, tags, setTags}) {
+export default function VideoTile({videoData, hidden, setEditVideo, setTags}) {
 
   // async function handleSubmit(e) {
   //   console.log(title, tags);
@@ -33,7 +33,7 @@ export default function VideoTile({videoData, hidden, setEditVideo, tags, setTag
     videoRef.current?.load();
   }, [videoData.path]);
 
-  if (hidden == 'false') {
+  if (hidden === 'false') {
     return(
       <div className='profile-videos' id={videoData.id} onClick={handleClick}>
         <video ref={videoRef}>
