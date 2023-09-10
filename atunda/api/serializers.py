@@ -9,7 +9,7 @@ class VideoUploadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = videoUpload
-        fields = ['id', 'owner', 'owner_id', 'title', 'path', 'tags', 'created']
+        fields = ['id', 'owner', 'owner_id', 'title', 'path', 'tags', 'created', 'is_pose_processing']
 
 class UserSerializer(serializers.ModelSerializer):
     videoUploads = serializers.PrimaryKeyRelatedField(many=True, queryset=videoUpload.objects.all())

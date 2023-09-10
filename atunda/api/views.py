@@ -153,24 +153,50 @@ class AddPoseDetection(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
+        # Retrieves the video based on the given name
         user = request.user
         data = request.data
         video = videoUpload.objects.filter(path=f"videos/{data['input']}")
 
+        # Returns 404 if video not found
         if len(video) == 0:
             return Response(status=status.HTTP_404_NOT_FOUND)
         video = video[0]
 
+        # Returns 401 if the user is not the video owner
         if video.owner != user:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
+        # Set the status of the video to processing mode
         video.is_pose_processing = True
         video.save()
 
+        # Gets temp numpy array and does pose processing
+        # Saves the video with name based on data['output']
         temp = get_pose_array(f"./media/{video.path}", f"./media/pose/{data['output']}", "./api/pose_landmarks/pose_landmarker.task")
 
+        # Turns off processing mode
         video.is_pose_processing = False
         video.save()
 
         return Response(status=status.HTTP_201_CREATED)
         
+class VideoDetail(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, pk):
+        # Attempts to retrieve the video where pk = videoId
+        try:
+          video = videoUpload.objects.get(pk=pk)
+        except:
+          return Response(status=status.HTTP_404_NOT_FOUND)
+        
+        # Returns 401 if user != owner
+        user = request.user
+        if video.owner != user:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        
+        # Returns seriliazed data for that specific video
+        video_serializer = VideoUploadSerializer(video)
+        
+        return Response(video_serializer.data, status=status.HTTP_200_OK)
