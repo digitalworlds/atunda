@@ -6,6 +6,8 @@ from rest_framework.authtoken.models import Token
 
 def upload_to(instance, filename):
     return f'videos/{filename}'
+def pose_upload_to(instance, filename):
+    return f'pose/{filename}'
 class videoUpload(models.Model):
     # associated with specific user that made api request
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="listings")
@@ -13,6 +15,9 @@ class videoUpload(models.Model):
     
     # path of file location is atunda/media/videos/{filename}
     path = models.FileField(upload_to=upload_to, blank=True, null=True)
+    pose_path = models.FileField(upload_to=pose_upload_to, blank=True, null=True)
+
+    is_pose_processing = models.BooleanField(default=False)
     
     # associated dance tags for ml model training
     # need to be uploaded in the form of tag1,tag2,tag3,tag4,...,tagn
