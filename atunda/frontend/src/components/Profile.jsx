@@ -8,6 +8,7 @@ import SubmitUpload from "./SubmitUpload";
 import BackButton from "./BackButton";
 import SaveButton from "./SaveButton";
 import Header from "./Header"
+import DeleteButton from "./DeleteButton";
 
 export default function Profile (props) {
     const {user, tags, setTags, status, setStatus, file, setFile, source, setSource, success, setSuccess} = props;
@@ -75,7 +76,7 @@ export default function Profile (props) {
 
     return (
       <div>
-        <Header fadeProp={fadeProp} success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
+        <Header fadeProp={fadeProp} success={success} user={user} status={'edit'} setStatus={setStatus} setTags={setTags} ></Header>
         <div class={"edit-video-container"}>   
           <div class={"edit-video-content"}>
             <h2>Edit Video</h2>
@@ -86,6 +87,7 @@ export default function Profile (props) {
           <video class={'edit-video'} autoPlay muted controls>
             <source src={editVideo[1].path}></source>
           </video>
+          <DeleteButton videoId={editVideo[1].id} setVideoRefresh={setVideoRefresh} videoRefresh={videoRefresh} user={user} setEditVideo={setEditVideo}></DeleteButton>
         </div>
         <div class="edit-video-footer">
           <BackButton setEditVideo={setEditVideo} setTags={setTags} ></BackButton>

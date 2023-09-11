@@ -18,13 +18,16 @@ export default function Header (props) {
         <div className="Header">
             <h1 >Project ATUNDA</h1>
                <div className={fadeProp}>{success}</div>
-            {status != 'upload' && 
+            {status === 'profile' && 
                 <h1 class='page-button' onClick={handleUpload}>Upload</h1>
             }
-            {status != 'profile' && 
+            {status === 'upload' && 
                 <h1 class='page-button' onClick={handleProfile}>Profile</h1>
             }
-            {/* <h1>{user.first_name + " " +  user.last_name}</h1> */}
+            {status === 'edit' && 
+                <h1 class='page-button'></h1>
+            }
+
             <img className="Profile" src={user.profile_pic} draggable='false'></img>
         </div>
     )

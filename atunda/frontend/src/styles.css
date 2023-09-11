@@ -293,7 +293,7 @@ h2 {
   margin: auto;
   margin-top: 35vh;
   margin-bottom: 0;
-  width: 60vw;
+  width: 90vw;
   margin-left: 6vw;
   border: none;
   border-radius: 5px;
@@ -329,7 +329,6 @@ h2 {
   margin-bottom: 1vh;
   border-radius: 7px;
   width: 20vw;
-  /* scroll-snap-align: end; */
   background-color: var(--video-background-color);
 }
 
@@ -386,18 +385,18 @@ h2 {
 .edit-video-container {
   padding-top: 3vh;
   margin-top: 10vh;
+  width: 100%;
   display: flex;
 }
 
 .edit-video-content {
   max-width: 45%;
   margin-left: 5vw;
-  flex-grow: 1;
+  flex-grow: 2;
   color: var(--main-text-color);
 }
 
 .edit-video {
-  margin-right: 5vw;
   width: 40vw;
   aspect-ratio: 16/9;
   border-radius: 7px;
@@ -423,11 +422,31 @@ h2 {
 }
 
 .back-button:hover {
-  background-color: var(--secondary-button-color);
   background-color: rgba(255, 0, 0, 0.451);
 }
 
 .save-button:hover {
-  background-color: var(--secondary-button-color);
   background-color: rgba(0, 255, 0, 0.451);
+}
+
+.delete-button {
+  display: flex;
+  color: var(--secondary-text-color);
+  font-size: clamp(1vw, 100vw, 0.5vw);
+  width: 5vw;
+  height: 5vw;
+  margin-bottom: 30vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-button-color);
+  background-color: rgba(255, 0, 0, 0.451);
+  cursor: pointer;
+  align-items: center;
+  text-align: center;
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 0.751);
 }
