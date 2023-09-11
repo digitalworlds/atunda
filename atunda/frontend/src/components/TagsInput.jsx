@@ -1,7 +1,12 @@
 import React from "react";
 
 export default function TagsInput(props) {
-    const {tags, setTags} = props;
+    
+    // const tags = (props.tags.length !== 0) ? props.tags[0].split(",") : [];
+
+    const tags = props.tags;
+    const setTags = props.setTags;
+
 
     const [input, setInput] = React.useState('');
 

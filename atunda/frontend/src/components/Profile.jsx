@@ -80,13 +80,13 @@ export default function Profile (props) {
             <h2>Tags: </h2>
             <TagsInput  tags={tags} setTags={setTags}></TagsInput>
           </div>
-          <video class={'edit-video'} autoplay controls>
+          <video class={'edit-video'} autoPlay muted controls>
             <source src={editVideo[1].path}></source>
           </video>
         </div>
         <div class="edit-video-footer">
           <BackButton setEditVideo={setEditVideo} setTags={setTags} ></BackButton>
-          <SaveButton></SaveButton>
+          <SaveButton title={editVideo[1].title} tags={tags} user={user} videoId={editVideo[1].id} setEditVideo={setEditVideo} setTags={setTags}></SaveButton>
         </div>
       </div>
     )

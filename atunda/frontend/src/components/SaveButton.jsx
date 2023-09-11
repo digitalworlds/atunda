@@ -1,9 +1,47 @@
+import axios from "axios";
+import { APPURL } from "../DjangoUrl";
 
-export default function SaveButton () {
+export default function SaveButton ({title, tags, user, videoId, setEditVideo, setTags}) {
+    // async function handleSubmit(e) {
+    //   console.log(title, tags);
+    //   e.preventDefault();
+    //   const config = {
+    //     url: APPURL + `/api/video/update/${videoData.id}/`,
+    //     method: "PATCH",
+    //     headers: {
+    //       "Authorization": "Bearer " + user.access
+    //     },
+    //     data: {
+    //       "title": title,
+    //       "tags": tags,
+    //     }
+    //   };
+    //   const res = await axios(config);
+    //   console.log(res);
+    //   setEditMode(false);
+    // }
 
-    const handleClick = (e) => {
-
+    async function handleClick (e) {
+        console.log(title, tags);
+        e.preventDefault();
+        const copyTags = tags.toString();
+        console.log(title, copyTags);
+        const config = {
+        url: APPURL + `api/video/update/${videoId}/`,
+        method: "PATCH",
+        headers: {
+            "Authorization": "Bearer " + user.access
+        },
+        data: {
+            "title": title,
+            "tags": copyTags,
         }
+        };
+        const res = await axios(config);
+        console.log(res);
+        setEditVideo([false, '']);
+        setTags([]);
+    }
 
     return (<div class="save-button" onClick={handleClick}>Save</div>)
 }

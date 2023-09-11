@@ -390,6 +390,7 @@ h2 {
 }
 
 .edit-video-content {
+  max-width: 45%;
   margin-left: 5vw;
   flex-grow: 1;
   color: var(--main-text-color);
