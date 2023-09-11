@@ -20,6 +20,8 @@ export default function Profile (props) {
   
     const[fadeProp, setFadeProp] = useState('success-hidden');
 
+    const[videoRefresh, setVideoRefresh] = useState(0);
+
     useEffect(() => {
       const config = {
         url: APPURL + "api/video/",
@@ -34,7 +36,7 @@ export default function Profile (props) {
         setVideosArray(res.data);
         setFilteredVideosArray(res.data);
       })
-    }, [user, status])
+    }, [user, videoRefresh])
 
     const handleChange = (e) => {
       e.preventDefault();
@@ -53,7 +55,8 @@ export default function Profile (props) {
           <Header fadeProp={fadeProp} success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
           <VideoInput file={file} setFile={setFile} source={source} setSource={setSource}/>
           <TagsInput  tags={tags} setTags={setTags} />
-          <SubmitUpload setFadeProp={setFadeProp} setSuccess={setSuccess} file={file} setFile={setFile} setSource={setSource} tags={tags} setTags={setTags} user={user}/>
+          <SubmitUpload setFadeProp={setFadeProp} setSuccess={setSuccess} file={file} setFile={setFile} setSource={setSource} tags={tags} setTags={setTags} user={user} setVideoRefresh={setVideoRefresh} videoRefresh={videoRefresh}/>
+          <VideoDisplay id='videoDisplay' unfiltered={videosArray} videosArray={[]} status={status} setEditVideo={setEditVideo} tags={tags} setTags={setTags}/>
         </div>
       )};
     if (!editVideo[0]) {
@@ -65,7 +68,7 @@ export default function Profile (props) {
               <input class="profile-videos-searchbar" onChange={handleChange} placeholder="Search">
               </input>
             </div>
-            <VideoDisplay id='videoDisplay' unfiltered={videosArray} videosArray={filteredVideosArray} setEditVideo={setEditVideo} tags={tags} setTags={setTags}/>
+            <VideoDisplay id='videoDisplay' unfiltered={videosArray} videosArray={filteredVideosArray} status={status} setEditVideo={setEditVideo} tags={tags} setTags={setTags}/>
         </div>
       )
     }
@@ -86,7 +89,7 @@ export default function Profile (props) {
         </div>
         <div class="edit-video-footer">
           <BackButton setEditVideo={setEditVideo} setTags={setTags} ></BackButton>
-          <SaveButton title={editVideo[1].title} tags={tags} user={user} videoId={editVideo[1].id} setEditVideo={setEditVideo} setTags={setTags}></SaveButton>
+          <SaveButton title={editVideo[1].title} tags={tags} user={user} videoId={editVideo[1].id} setEditVideo={setEditVideo} setTags={setTags} setVideoRefresh={setVideoRefresh} videoRefresh={videoRefresh}></SaveButton>
         </div>
       </div>
     )

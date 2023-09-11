@@ -4,7 +4,7 @@ import { APPURL } from "../DjangoUrl";
 import "../styles.css";
 
 export default function SubmitUpload(props) {
-  const {user, file, setFile, setSource, tags, setTags, setSuccess, setFadeProp} = props;
+  const {user, file, setFile, setSource, tags, setTags, setSuccess, setFadeProp, videoRefresh, setVideoRefresh} = props;
   async function handleSubmit (event) {
     let formData = new FormData();
     formData.append('title', file.name.substring(0, file.name.length - 4));
@@ -34,6 +34,7 @@ export default function SubmitUpload(props) {
         setTimeout (() => {
           setFadeProp('success-hidden');
         }, 6000);
+        setVideoRefresh(videoRefresh + 1);
     } else {
         setSuccess('File Upload Unsuccessful');
         setFadeProp('unsuccess-visible');

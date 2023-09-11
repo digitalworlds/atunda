@@ -1,7 +1,7 @@
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
 
-export default function SaveButton ({title, tags, user, videoId, setEditVideo, setTags}) {
+export default function SaveButton ({title, tags, user, videoId, setEditVideo, setTags, setVideoRefresh, videoRefresh}) {
     // async function handleSubmit(e) {
     //   console.log(title, tags);
     //   e.preventDefault();
@@ -41,6 +41,7 @@ export default function SaveButton ({title, tags, user, videoId, setEditVideo, s
         console.log(res);
         setEditVideo([false, '']);
         setTags([]);
+        setVideoRefresh(videoRefresh + 1);
     }
 
     return (<div class="save-button" onClick={handleClick}>Save</div>)
