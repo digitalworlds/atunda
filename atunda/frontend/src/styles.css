@@ -422,7 +422,7 @@ h2 {
 }
 
 .back-button:hover {
-  background-color: rgba(255, 0, 0, 0.451);
+  background-color: var(--secondary-button-color)
 }
 
 .save-button:hover {
@@ -449,4 +449,82 @@ h2 {
 
 .delete-button:hover {
   background-color: rgba(255, 0, 0, 0.751);
+}
+/* 
+.popup-content {
+  margin: auto;
+  background: rgb(255, 0, 255);
+  width: 50%;
+  padding: 5px;
+}
+
+.popup-arrow {
+  color: rgb(255, 255, 255);
+} */
+
+[role='tooltip'].popup-content {
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-popup='tooltip'].popup-overlay {
+  background: transparent;
+}
+
+.modal {
+  font-size: 12px;
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
+  border-radius: 7px;
+}
+
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: xx-large;
+  text-align: center;
+  padding: 5px;
+}
+
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+  display: grid;
+  grid-template: "button button";
+}
+
+.button {
+  background-color: var(--main-button-color);
+  margin: auto;
+  color: var(--main-text-color);
+}
+
+.button:hover {
+  background-color: var(--secondary-button-color);
+}
+
+
+.modal > .close {
+  
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: var(--main-button-color);
+  border-radius: 18px;
 }
