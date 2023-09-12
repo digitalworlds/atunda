@@ -1,30 +1,14 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "../styles.css";
 
-export default function VideoTile({videoData, hidden, setEditVideo, tags, setTags}) {
+export default function VideoTile({videoData, hidden, setEditVideo, setTags}) {
 
-  // async function handleSubmit(e) {
-  //   console.log(title, tags);
-  //   e.preventDefault();
-  //   const config = {
-  //     url: APPURL + `/api/video/update/${videoData.id}/`,
-  //     method: "PATCH",
-  //     headers: {
-  //       "Authorization": "Bearer " + user.access
-  //     },
-  //     data: {
-  //       "title": title,
-  //       "tags": tags,
-  //     }
-  //   };
-  //   const res = await axios(config);
-  //   console.log(res);
-  //   setEditMode(false);
-  // }
+
 
   const handleClick = (e) => {
     setEditVideo([true, videoData]);
-    const tagsCopy = [videoData.tags];
+    const tagsCopy = videoData.tags.split(',');
+    console.log(tagsCopy);
     setTags(tagsCopy);
   };
 
@@ -33,7 +17,7 @@ export default function VideoTile({videoData, hidden, setEditVideo, tags, setTag
     videoRef.current?.load();
   }, [videoData.path]);
 
-  if (hidden == 'false') {
+  if (hidden === 'false') {
     return(
       <div className='profile-videos' id={videoData.id} onClick={handleClick}>
         <video ref={videoRef}>

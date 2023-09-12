@@ -47,17 +47,54 @@ body {
 }
 
   
-.Success {
+.success-visible {
   margin:auto;
   margin-left: 10%;
   color: lightgreen;
+  
+  opacity: 1;
 }
 
-.Unsuccess {
+.success-fade {
+  margin:auto;
+  margin-left: 10%;
+  color: lightgreen;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  
+}
+
+.success-hidden {
+  margin:auto;
+  margin-left: 10%;
+  color: lightgreen;
+  opacity: 0;
+}
+
+.unsuccess-visible {
   margin:auto;
   margin-left: 10%;
   color: red;
+  
+  opacity: 1;
 }
+
+.unsuccess-fade {
+  margin:auto;
+  margin-left: 10%;
+  color: red;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  
+}
+
+.unsuccess-hidden {
+  margin:auto;
+  margin-left: 10%;
+  color: red;
+  opacity: 0;
+}
+
 
 .VideoInput {
   margin: 1%;
@@ -256,7 +293,7 @@ h2 {
   margin: auto;
   margin-top: 35vh;
   margin-bottom: 0;
-  width: 60vw;
+  width: 90vw;
   margin-left: 6vw;
   border: none;
   border-radius: 5px;
@@ -292,7 +329,6 @@ h2 {
   margin-bottom: 1vh;
   border-radius: 7px;
   width: 20vw;
-  /* scroll-snap-align: end; */
   background-color: var(--video-background-color);
 }
 
@@ -349,17 +385,18 @@ h2 {
 .edit-video-container {
   padding-top: 3vh;
   margin-top: 10vh;
+  width: 100%;
   display: flex;
 }
 
 .edit-video-content {
+  max-width: 45%;
   margin-left: 5vw;
-  flex-grow: 1;
+  flex-grow: 2;
   color: var(--main-text-color);
 }
 
 .edit-video {
-  margin-right: 5vw;
   width: 40vw;
   aspect-ratio: 16/9;
   border-radius: 7px;
@@ -368,4 +405,126 @@ h2 {
 
 .edit-video-footer {
   display: flex;
+}
+
+.back-button, .save-button{
+  color: var(--secondary-text-color);
+  font-size: xx-large;
+  width: 80%;
+  margin: 10%;
+  margin-top: 5%;
+  padding: 3%;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-button-color);
+  cursor: pointer;
+  text-align: center;
+}
+
+.back-button:hover {
+  background-color: var(--secondary-button-color)
+}
+
+.save-button:hover {
+  background-color: rgba(0, 255, 0, 0.451);
+}
+
+.delete-button {
+  display: flex;
+  color: var(--secondary-text-color);
+  font-size: clamp(1vw, 100vw, 0.5vw);
+  width: 5vw;
+  height: 5vw;
+  margin-bottom: 30vh;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--main-button-color);
+  background-color: rgba(255, 0, 0, 0.451);
+  cursor: pointer;
+  align-items: center;
+  text-align: center;
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 0, 0, 0.751);
+}
+/* 
+.popup-content {
+  margin: auto;
+  background: rgb(255, 0, 255);
+  width: 50%;
+  padding: 5px;
+}
+
+.popup-arrow {
+  color: rgb(255, 255, 255);
+} */
+
+[role='tooltip'].popup-content {
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-popup='tooltip'].popup-overlay {
+  background: transparent;
+}
+
+.modal {
+  font-size: 12px;
+  color: var(--main-text-color);
+  background-color: var(--main-bg-color);
+  border-radius: 7px;
+}
+
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: xx-large;
+  text-align: center;
+  padding: 5px;
+}
+
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+  display: grid;
+  grid-template: "button button";
+}
+
+.button {
+  background-color: var(--main-button-color);
+  margin: auto;
+  color: var(--main-text-color);
+}
+
+.button:hover {
+  background-color: var(--secondary-button-color);
+}
+
+
+.modal > .close {
+  
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: var(--main-button-color);
+  border-radius: 18px;
 }

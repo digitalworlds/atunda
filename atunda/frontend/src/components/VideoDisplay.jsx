@@ -1,6 +1,6 @@
 import VideoTile from "./VideoTile"
 
-export default function VideoDisplay({unfiltered, videosArray, setEditVideo, tags, setTags}) {
+export default function VideoDisplay({unfiltered, videosArray, setEditVideo, tags, setTags, status}) {
     if (videosArray.length > 0) {
         return (
             <div className="profile-videos-container">
@@ -14,10 +14,15 @@ export default function VideoDisplay({unfiltered, videosArray, setEditVideo, tag
         )
     }
 
+    if (status !== 'upload'){
+        return (
+            <div className="noVideo">
+                <h1>No videos found</h1>
+            </div>
+        )
+    }
+
     return (
-        <div className="noVideo">
-            <h1>No videos found</h1>
-        </div>
+        <></>
     )
-    
 }

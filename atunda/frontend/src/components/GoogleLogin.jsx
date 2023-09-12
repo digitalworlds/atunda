@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import axios from "axios";
 import { APPURL } from "../DjangoUrl";
 
@@ -34,6 +33,10 @@ export default function GoogleLogin({setUser, setStatus}) {
   }, 1000);
   
   return(
-    <div id="signInDiv"></div>
+    <div>
+      <h1>Welcome To ATUNDA Video Upload Tool</h1>
+      <div id="signInDiv"></div>
+    </div>
+    
   )
 }

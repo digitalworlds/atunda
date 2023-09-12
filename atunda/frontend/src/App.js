@@ -1,8 +1,4 @@
 import GoogleLogin from "./components/GoogleLogin";
-import VideoInput from "./components/VideoInput";
-import TagsInput from "./components/TagsInput";
-import SubmitUpload from "./components/SubmitUpload";
-import Header from "./components/Header";
 import Profile from "./components/Profile";
 import { useState, React } from "react";
 import "./styles.css";
@@ -21,8 +17,8 @@ function App() {
     return (
       <div>
         <div className="App">
-          <Header success={success} user={user} status={status} setStatus={setStatus} setTags={setTags} ></Header>
-          <Profile user={user} tags={tags} setTags={setTags} status={status} setStatus={setStatus}  file={file} setFile={setFile} source={source} setSource={setSource} setSuccess={setSuccess} />
+          
+          <Profile user={user} tags={tags} setTags={setTags} status={status} setStatus={setStatus}  file={file} setFile={setFile} source={source} success={success} setSource={setSource} setSuccess={setSuccess} />
         </div>
       </div>
     )
