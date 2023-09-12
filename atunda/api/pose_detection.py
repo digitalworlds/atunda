@@ -30,35 +30,39 @@ def draw_landmarks_on_image(rgb_image, detection_result):
 
 def get_pose_array(input_path: str, output_path: str, model_asset_path: str):
   # Configers base options for landmark detection
+  VisionRunningMode = mp.tasks.vision.RunningMode
   base_options = python.BaseOptions(model_asset_path=model_asset_path)
   options = vision.PoseLandmarkerOptions(
     base_options=base_options,
-    output_segmentation_masks=True
+    output_segmentation_masks=True,
+    running_mode=VisionRunningMode.VIDEO
   )
   detector = vision.PoseLandmarker.create_from_options(options)
 
   # Opens the input file and ouput file based on paths given
-  cap = cv2.VideoCapture(input_path)
+  video = cv2.VideoCapture(input_path)
   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-  out = cv2.VideoWriter(output_path, fourcc, 30, (int(cap.get(3)), int(cap.get(4))))
+  out = cv2.VideoWriter(output_path, fourcc, 30, (int(video.get(3)), int(video.get(4))))
 
   frame_positions = []
   # Iterates over every frame in the input
-  while cap.isOpened():
-    ret, frame = cap.read()
-    if not ret:
+  while video.isOpened():
+    success, frame = video.read()
+    if not success:
       break
-    # Converts frame to media pip image and runs detection on it
+    # Converts frame to mediapipe image and runs detection on it
+    # Uses video detection mode for more optimized performance
+    frame_timestamp = int(video.get(cv2.CAP_PROP_POS_MSEC))
     image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame)
-    detection_result = detector.detect(image)
+    detection_result = detector.detect_for_video(image, frame_timestamp)
     # print(detection_result)
     # frame_positions.append(detection_result.pose_landmarks[0])
     
     # Annotates landmarks onto current frame and writes the frame to the output file
     annotated_frame = draw_landmarks_on_image(frame, detection_result)
-
     out.write(annotated_frame)
-  cap.release()
+    
+  video.release()
   out.release()
   cv2.destroyAllWindows()
 
