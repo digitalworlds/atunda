@@ -152,16 +152,13 @@ class UserPermissions(APIView):
 class AddPoseDetection(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request):
-        # Retrieves the video based on the given name
-        user = request.user
-        data = request.data
-        video = videoUpload.objects.filter(path=f"videos/{data['input']}")
-
-        # Returns 404 if video not found
-        if len(video) == 0:
+    def post(self, request, pk):
+        # Retrieves the video based on the id
+        try:
+            video = videoUpload.objects.get(pk=pk)
+            user = request.user
+        except:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        video = video[0]
 
         # Returns 401 if the user is not the video owner
         if video.owner != user:
@@ -171,9 +168,14 @@ class AddPoseDetection(APIView):
         video.is_pose_processing = True
         video.save()
 
+        # Changes file type to mp4 if necessary
+        output_path = str(video.path)[7:]
+        extension_index, file_type = find_video_type(output_path)
+        if file_type != "mp4":
+            output_path = output_path[:extension_index+1] + "mp4"
         # Gets temp numpy array and does pose processing
         # Saves the video with name based on data['output']
-        temp = get_pose_array(f"./media/{video.path}", f"./media/pose/{data['output']}", "./api/pose_landmarks/pose_landmarker.task")
+        temp = get_pose_array(f"./media/{video.path}", f"./media/pose/{output_path}", "./api/pose_landmarks/pose_landmarker.task")
 
         # Turns off processing mode
         video.is_pose_processing = False
