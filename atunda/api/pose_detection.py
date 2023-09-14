@@ -5,6 +5,7 @@ from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 from mediapipe.framework.formats import landmark_pb2
 from mediapipe import solutions
+import json
 
 
 def draw_landmarks_on_image(rgb_image, detection_result):
@@ -44,7 +45,13 @@ def get_pose_array(input_path: str, output_path: str, model_asset_path: str):
   fourcc = cv2.VideoWriter_fourcc(*'XVID')
   out = cv2.VideoWriter(output_path, fourcc, video.get(cv2.CAP_PROP_FPS), (int(video.get(3)), int(video.get(4))))
 
-  frame_positions = []
+  frame_positions = {
+    "x": "",
+    "y": "",
+    "z": "",
+    "visibility": "",
+    "presence": "",
+  }
   # Iterates over every frame in the input
   while video.isOpened():
     success, frame = video.read()
@@ -57,16 +64,28 @@ def get_pose_array(input_path: str, output_path: str, model_asset_path: str):
     detection_result = detector.detect_for_video(image, frame_timestamp)
     # print(detection_result)
     # frame_positions.append(detection_result.pose_landmarks[0])
+    x = [str(landmark.x) for landmark in detection_result.pose_landmarks[0]]
+    y = [str(landmark.y) for landmark in detection_result.pose_landmarks[0]]
+    z = [str(landmark.z) for landmark in detection_result.pose_landmarks[0]]
+    visibility = [str(landmark.visibility) for landmark in detection_result.pose_landmarks[0]]
+    presence = [str(landmark.presence) for landmark in detection_result.pose_landmarks[0]]
+
+    frame_positions["x"] += ",".join(x) + ";"
+    frame_positions["y"] += ",".join(y) + ";"
+    frame_positions["z"] += ",".join(z) + ";"
+    frame_positions["visibility"] += ",".join(visibility) + ";"
+    frame_positions["presence"] += ",".join(presence) + ";"
     
     # Annotates landmarks onto current frame and writes the frame to the output file
     annotated_frame = draw_landmarks_on_image(frame, detection_result)
     out.write(annotated_frame)
-
+  
+  
   video.release()
   out.release()
   cv2.destroyAllWindows()
 
-  return np.array(frame_positions)
+  return frame_positions
 
 def main():
   np_frames = get_pose_array()

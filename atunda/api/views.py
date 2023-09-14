@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from api.models import videoUpload, userPermissions
+from api.models import videoUpload, userPermissions, poseLandmarkData
 from rest_framework import generics
 from django.contrib.auth.models import User, Permission
 from rest_framework import permissions
@@ -180,7 +180,7 @@ class AddPoseDetection(APIView):
             output_path = output_path[:extension_index+1] + "mp4"
         # Gets temp numpy array and does pose processing
         # Saves the video with name based on data['output']
-        temp = get_pose_array(f"./media/{video.path}", f"./media/pose/{output_path}", "./api/pose_landmarks/pose_landmarker.task")
+        frame_positions = get_pose_array(f"./media/{video.path}", f"./media/pose/{output_path}", "./api/pose_landmarks/pose_landmarker.task")
 
         # Turns off processing mode
         video.is_pose_processing = False
@@ -195,6 +195,14 @@ class AddPoseDetection(APIView):
         # Save compressed video path
         video.pose_path = str(video.pose_path)[:-4] + "-compressed.mp4"
         video.save()
+
+        poseData = poseLandmarkData.objects.create(owner=user, video=video)
+        poseData.x_values = frame_positions["x"]
+        poseData.y_values = frame_positions["y"]
+        poseData.z_values = frame_positions["y"]
+        poseData.visibility_values = frame_positions["visibility"]
+        poseData.presence_values = frame_positions["presence"]
+        poseData.save()
 
         return Response(status=status.HTTP_201_CREATED)
         

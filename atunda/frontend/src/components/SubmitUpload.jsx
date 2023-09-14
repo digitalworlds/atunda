@@ -9,6 +9,7 @@ export default function SubmitUpload(props) {
     let formData = new FormData();
     formData.append('title', file.name.substring(0, file.name.length - 4));
     formData.append('path', file);
+    formData.append('pose_path', file);
     formData.append('tags', tags);
     const config = {
         method: "post",

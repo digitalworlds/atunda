@@ -32,3 +32,12 @@ class userPermissions(models.Model):
     allow_for_model = models.BooleanField(default=False)
     # Permission for allowing videos to be published in the dataset
     allow_for_dataset = models.BooleanField(default=False)
+
+class poseLandmarkData(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.OneToOneField(videoUpload, on_delete=models.CASCADE)
+    x_values = models.TextField()
+    y_values = models.TextField()
+    z_values = models.TextField()
+    visibility_values = models.TextField()
+    presence_values = models.TextField()
