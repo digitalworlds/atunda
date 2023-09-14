@@ -6,10 +6,11 @@ class VideoUploadSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.email')
     owner_id = serializers.ReadOnlyField(source='owner.id')
     path = serializers.FileField(required=True)
+    pose_path = serializers.FileField()
 
     class Meta:
         model = videoUpload
-        fields = ['id', 'owner', 'owner_id', 'title', 'path', 'tags', 'created', 'is_pose_processing']
+        fields = ['id', 'owner', 'owner_id', 'title', 'path', 'pose_path', 'tags', 'created', 'is_pose_processing']
 
 class UserSerializer(serializers.ModelSerializer):
     videoUploads = serializers.PrimaryKeyRelatedField(many=True, queryset=videoUpload.objects.all())

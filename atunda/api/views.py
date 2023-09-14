@@ -11,6 +11,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.conf import settings
 import moviepy.editor as moviepy
 from api.pose_detection import get_pose_array
+from django.core.files import File
 
 # Create your views here.
 class CreateUser(APIView):
@@ -153,6 +154,10 @@ class AddPoseDetection(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
+        def compress_video(input_path, output_path, target_bitrate):
+            video_clip = moviepy.VideoFileClip(input_path)
+            video_clip.write_videofile(output_path, bitrate=target_bitrate, codec="libx264")
+        
         # Retrieves the video based on the id
         try:
             video = videoUpload.objects.get(pk=pk)
@@ -179,6 +184,16 @@ class AddPoseDetection(APIView):
 
         # Turns off processing mode
         video.is_pose_processing = False
+        
+        # Use moviepy to compress video
+        video.pose_path = f"pose/{output_path}"
+
+        abosulte_video_path = str(settings.BASE_DIR)[:-6] + 'atunda/media/' + str(video.pose_path)
+
+        compress_video(abosulte_video_path, abosulte_video_path[:-4] + "-compressed.mp4", "5000k")
+
+        # Save compressed video path
+        video.pose_path = str(video.pose_path)[:-4] + "-compressed.mp4"
         video.save()
 
         return Response(status=status.HTTP_201_CREATED)

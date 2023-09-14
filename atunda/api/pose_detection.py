@@ -42,7 +42,7 @@ def get_pose_array(input_path: str, output_path: str, model_asset_path: str):
   # Opens the input file and ouput file based on paths given
   video = cv2.VideoCapture(input_path)
   fourcc = cv2.VideoWriter_fourcc(*'XVID')
-  out = cv2.VideoWriter(output_path, fourcc, 30, (int(video.get(3)), int(video.get(4))))
+  out = cv2.VideoWriter(output_path, fourcc, video.get(cv2.CAP_PROP_FPS), (int(video.get(3)), int(video.get(4))))
 
   frame_positions = []
   # Iterates over every frame in the input
@@ -61,7 +61,7 @@ def get_pose_array(input_path: str, output_path: str, model_asset_path: str):
     # Annotates landmarks onto current frame and writes the frame to the output file
     annotated_frame = draw_landmarks_on_image(frame, detection_result)
     out.write(annotated_frame)
-    
+
   video.release()
   out.release()
   cv2.destroyAllWindows()
