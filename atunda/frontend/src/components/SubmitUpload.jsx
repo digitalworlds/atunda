@@ -21,7 +21,16 @@ export default function SubmitUpload(props) {
         data: formData,
       };
     const res = await axios(config);
+
+    const pose_config = {
+      method: "post",
+      url: APPURL + `api/pose/${res.data.id}/`,
+      headers: {
+        "Authorization": "Bearer " + user.access
+      },
+    }
     console.log(res);
+    axios(pose_config).then((res) => {console.log(res)})
 
     if (res.status == 201) {
         setTags([]);
