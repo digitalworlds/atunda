@@ -30,7 +30,10 @@ export default function SubmitUpload(props) {
       },
     }
     console.log(res);
-    axios(pose_config).then((res) => {console.log(res)})
+    axios(pose_config).then((res) => {
+      console.log(res);
+      setVideoRefresh(videoRefresh + 10);
+    })
 
     if (res.status == 201) {
         setTags([]);

@@ -204,7 +204,8 @@ class AddPoseDetection(APIView):
         poseData.presence_values = frame_positions["presence"]
         poseData.save()
 
-        return Response(status=status.HTTP_201_CREATED)
+        video_serializer = VideoUploadSerializer(video)
+        return Response(video_serializer.data, status=status.HTTP_201_CREATED)
         
 class VideoDetail(APIView):
     permission_classes = [permissions.IsAuthenticated]

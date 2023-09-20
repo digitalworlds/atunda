@@ -15,13 +15,13 @@ export default function VideoTile({videoData, hidden, setEditVideo, setTags}) {
   const videoRef = useRef();
   useEffect(() => {    
     videoRef.current?.load();
-  }, [videoData.path]);
+  }, [videoData.pose_path]);
 
   if (hidden === 'false') {
     return(
       <div className='profile-videos' id={videoData.id} onClick={handleClick}>
         <video ref={videoRef}>
-          <source src={videoData.path}></source>
+          <source src={videoData.pose_path}></source>
         </video>
         <div className="overlayText">
             <h2 id="topText">{videoData.title}</h2>
@@ -32,7 +32,7 @@ export default function VideoTile({videoData, hidden, setEditVideo, setTags}) {
   return(
     <div className='profile-videos' id={videoData.id} hidden onClick={handleClick}>
       <video ref={videoRef} controls>
-        <source src={videoData.path}></source>
+        <source src={videoData.pose_path}></source>
       </video>
       <div className="overlayText">
           <p id="topText">{videoData.title}</p>
