@@ -33,7 +33,6 @@ export default function Profile (props) {
       }
   
       axios(config).then((res) => {
-        console.log(res.data);
         setVideosArray(res.data);
         setFilteredVideosArray(res.data);
       })
@@ -41,9 +40,6 @@ export default function Profile (props) {
 
     const handleChange = (e) => {
       e.preventDefault();
-      console.log('hi');
-      console.log(videosArray);
-      console.log(videosArray.filter(video => video.title.includes(e.target.value)));
       setFilteredVideosArray(videosArray.filter(video => video.title.includes(e.target.value)));
       
     };
@@ -85,7 +81,7 @@ export default function Profile (props) {
             <TagsInput  tags={tags} setTags={setTags}></TagsInput>
           </div>
           <video class={'edit-video'} autoPlay muted controls>
-            <source src={editVideo[1].path}></source>
+            <source src={editVideo[1].pose_path}></source>
           </video>
           <DeleteButton videoId={editVideo[1].id} setVideoRefresh={setVideoRefresh} videoRefresh={videoRefresh} user={user} setEditVideo={setEditVideo}></DeleteButton>
         </div>
