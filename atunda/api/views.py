@@ -180,6 +180,7 @@ class AddPoseDetection(APIView):
             output_path = output_path[:extension_index+1] + "mp4"
         # Gets temp numpy array and does pose processing
         # Saves the video with name based on data['output']
+        print(video.path, output_path)
         frame_positions = get_pose_array(f"./media/{video.path}", f"./media/pose/{output_path}", "./api/pose_landmarks/pose_landmarker.task")
 
         # Turns off processing mode

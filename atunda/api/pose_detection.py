@@ -64,17 +64,25 @@ def get_pose_array(input_path: str, output_path: str, model_asset_path: str):
     detection_result = detector.detect_for_video(image, frame_timestamp)
     # print(detection_result)
     # frame_positions.append(detection_result.pose_landmarks[0])
-    x = [str(landmark.x) for landmark in detection_result.pose_landmarks[0]]
-    y = [str(landmark.y) for landmark in detection_result.pose_landmarks[0]]
-    z = [str(landmark.z) for landmark in detection_result.pose_landmarks[0]]
-    visibility = [str(landmark.visibility) for landmark in detection_result.pose_landmarks[0]]
-    presence = [str(landmark.presence) for landmark in detection_result.pose_landmarks[0]]
+    if (detection_result.pose_landmarks != []):
+      if(len(detection_result.pose_landmarks[0]) != 33):
+        print(len(detection_result.pose_landmarks[0]))
+    else:
+      print('empty')
+    try:
+      x = [str(landmark.x) for landmark in detection_result.pose_landmarks[0]]
+      y = [str(landmark.y) for landmark in detection_result.pose_landmarks[0]]
+      z = [str(landmark.z) for landmark in detection_result.pose_landmarks[0]]
+      visibility = [str(landmark.visibility) for landmark in detection_result.pose_landmarks[0]]
+      presence = [str(landmark.presence) for landmark in detection_result.pose_landmarks[0]]
 
-    frame_positions["x"] += ",".join(x) + ";"
-    frame_positions["y"] += ",".join(y) + ";"
-    frame_positions["z"] += ",".join(z) + ";"
-    frame_positions["visibility"] += ",".join(visibility) + ";"
-    frame_positions["presence"] += ",".join(presence) + ";"
+      frame_positions["x"] += ",".join(x) + ";"
+      frame_positions["y"] += ",".join(y) + ";"
+      frame_positions["z"] += ",".join(z) + ";"
+      frame_positions["visibility"] += ",".join(visibility) + ";"
+      frame_positions["presence"] += ",".join(presence) + ";"
+    except:
+      continue
     
     # Annotates landmarks onto current frame and writes the frame to the output file
     annotated_frame = draw_landmarks_on_image(frame, detection_result)
