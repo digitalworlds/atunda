@@ -3,7 +3,7 @@ from api.models import videoUpload, userPermissions, poseLandmarkData
 from rest_framework import generics
 from django.contrib.auth.models import User, Permission
 from rest_framework import permissions
-from api.serializers import UserSerializer,CreateUserSerializer, VideoUploadSerializer, UserPermissionsSerializer
+from api.serializers import UserSerializer,CreateUserSerializer, VideoUploadSerializer, UserPermissionsSerializer, PoseLandmarkSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -43,7 +43,10 @@ class VideoUploadViewSet(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        queryset = videoUpload.objects.filter(owner=user)
+        if user.is_superuser:
+          queryset = videoUpload.objects.all()
+        else:
+          queryset = videoUpload.objects.filter(owner=user)
         return queryset
 
     def perform_create(self, serializer):
@@ -226,3 +229,21 @@ class VideoDetail(APIView):
         video_serializer = VideoUploadSerializer(video)
         
         return Response(video_serializer.data, status=status.HTTP_200_OK)
+
+class GetPoseLandmarks(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, pk):
+      print("test")
+      try:
+        video = videoUpload.objects.get(pk=pk)
+        pose_data = poseLandmarkData.objects.get(video=video)
+      except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+      user = self.request.user
+      if pose_data.owner != user and not user.is_superuser:
+         return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+      serialize_pose = PoseLandmarkSerializer(pose_data)
+
+      return Response(data=serialize_pose.data, status=status.HTTP_200_OK)

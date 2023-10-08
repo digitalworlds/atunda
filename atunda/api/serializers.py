@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import videoUpload, userPermissions
+from api.models import videoUpload, userPermissions, poseLandmarkData
 from django.contrib.auth.models import User
 
 class VideoUploadSerializer(serializers.ModelSerializer):
@@ -47,3 +47,11 @@ class UserPermissionsSerializer(serializers.ModelSerializer):
     class Meta:
         model = userPermissions
         fields = ['user', 'user_id','allow_for_model', 'allow_for_dataset']
+
+class PoseLandmarkSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.email')
+    owner_id = serializers.ReadOnlyField(source='owner.id')
+
+    class Meta:
+        model = poseLandmarkData
+        fields = ['owner', 'owner_id', 'video', 'x_values', 'y_values', 'z_values', 'visibility_values', 'presence_values']
