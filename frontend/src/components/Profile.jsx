@@ -22,7 +22,12 @@ export default function Profile (props) {
     const[fadeProp, setFadeProp] = useState('success-hidden');
 
     const[videoRefresh, setVideoRefresh] = useState(0);
-
+    function convertToHttps(videosArray) {
+      for (let video of videosArray) {
+        video.pose_path = video.pose_path.slice(0, 4) + "s" + video.pose_path.slice(4, 27) + "/projects/atunda/" + video.pose_path.slice(27);
+        video.path = video.path.slice(0, 4) + "s" + video.path.slice(4, 27) + "/projects/atunda/" + video.path.slice(27);
+      }
+    }
     useEffect(() => {
       const config = {
         url: APPURL + "api/video/",
@@ -33,8 +38,11 @@ export default function Profile (props) {
       }
   
       axios(config).then((res) => {
-        setVideosArray(res.data);
-        setFilteredVideosArray(res.data);
+        let data = res.data;
+        convertToHttps(data);
+        setVideosArray(data);
+        console.log(data);
+        setFilteredVideosArray(data);
       })
     }, [user, videoRefresh])
 

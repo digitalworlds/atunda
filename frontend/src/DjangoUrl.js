@@ -1,3 +1,3 @@
-const APPURL = "http://127.0.0.1:8000/"
+const APPURL = "https://research.dwi.ufl.edu/projects/atunda/"
 
 export {APPURL};
