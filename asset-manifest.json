@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/digitalworlds/atunda/static/css/main.04fa7f6e.css",
-    "main.js": "/digitalworlds/atunda/static/js/main.d05f4c9d.js",
-    "static/js/787.cda612ba.chunk.js": "/digitalworlds/atunda/static/js/787.cda612ba.chunk.js",
-    "index.html": "/digitalworlds/atunda/index.html",
-    "main.04fa7f6e.css.map": "/digitalworlds/atunda/static/css/main.04fa7f6e.css.map",
-    "main.d05f4c9d.js.map": "/digitalworlds/atunda/static/js/main.d05f4c9d.js.map",
-    "787.cda612ba.chunk.js.map": "/digitalworlds/atunda/static/js/787.cda612ba.chunk.js.map"
+    "main.css": "/atunda/static/css/main.04fa7f6e.css",
+    "main.js": "/atunda/static/js/main.d24f3546.js",
+    "static/js/787.cda612ba.chunk.js": "/atunda/static/js/787.cda612ba.chunk.js",
+    "index.html": "/atunda/index.html",
+    "main.04fa7f6e.css.map": "/atunda/static/css/main.04fa7f6e.css.map",
+    "main.d24f3546.js.map": "/atunda/static/js/main.d24f3546.js.map",
+    "787.cda612ba.chunk.js.map": "/atunda/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.04fa7f6e.css",
-    "static/js/main.d05f4c9d.js"
+    "static/js/main.d24f3546.js"
   ]
 }
