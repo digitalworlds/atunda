@@ -203,7 +203,7 @@ class AddPoseDetection(APIView):
         poseData = poseLandmarkData.objects.create(owner=user, video=video)
         poseData.x_values = frame_positions["x"]
         poseData.y_values = frame_positions["y"]
-        poseData.z_values = frame_positions["y"]
+        poseData.z_values = frame_positions["z"]
         poseData.visibility_values = frame_positions["visibility"]
         poseData.presence_values = frame_positions["presence"]
         poseData.save()

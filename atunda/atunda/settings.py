@@ -24,7 +24,6 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'atunda/media')
 MEDIA_URL = '/media/'
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -34,7 +33,7 @@ SECRET_KEY = 'django-insecure-hdvw7l3n26i+*wk#obz(lhh0iw+s*o_3ykf2ne2m6^blm5jolw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.5.162.44", "research.dwi.ufl.edu"]
 
 
 # Application definition
@@ -96,7 +95,7 @@ WSGI_APPLICATION = 'atunda.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'media/db.sqlite3',
     }
 }
 

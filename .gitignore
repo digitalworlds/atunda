@@ -8,4 +8,6 @@ __pycache__
 /include
 /lib
 /etc
+/lib64
+/atunda/media
 db.sqlite3
